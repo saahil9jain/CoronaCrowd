@@ -11,7 +11,7 @@
 <div id='app' v-bind:class="'scene-'+scene">
   <section class='crowd' >
     <header>
-      <h1>Bookshop</h1>
+      <h1>{{ crowd.title }}</h1>
       <p>{{ people.length + 1 }} people here</p>
     </header>
     <div class='modal' id='welcome' v-if="scene == 'interstitial'">
@@ -25,10 +25,10 @@
     <div class='modal-bg' v-if="scene == 'interstitial'"></div>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
-        <div class='person' style='background-image:url("assets/img/person1.png")'></div>
+<!--         <div class='person' style='background-image:url("assets/img/person1.png")'></div>
         <div class='person' style='left:250px;top:130px;background-image:url("assets/img/person2.png")'></div>
         <div class='person' style='left:180px;top:80px;background-image:url("assets/img/person3.png")'></div>
-
+ -->
         <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
       </div>
       <div class='person' id='me' v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')' }"></div>
