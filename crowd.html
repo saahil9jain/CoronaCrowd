@@ -4,13 +4,21 @@
   <title>{{Crowd}} - Corona Crowd</title>
   <link rel='stylesheet' href='assets/style.css'>
 </head>
-<body>
+<body id='crowd'>
   <!-- map -->
-  <header>
-    <div class='logo'>Corona Crowd</div>
-  </header>
-  <section class='map'>
-    draggable map goes here..
+  <section class='crowd'>
+    <header>
+      <h1>Bookshop</h1>
+      <p>21 here</p>
+    </header>
+    <div id='crowdmap-wrapper'>
+      <div id='crowdmap'>
+        <div class='person' style='background-image:url("assets/img/person1.png")'></div>
+        <div class='person' style='left:250px;top:130px;background-image:url("assets/img/person2.png")'></div>
+        <div class='person' style='left:180px;top:80px;background-image:url("assets/img/person3.png")'></div>
+      </div>
+      <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
+    </div>
   </section>
   <hr>
   <section class='help'>
@@ -21,4 +29,68 @@
   </section>
   <footer>
   </footer>
+  <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
+  <script>
+
+  const _DB = {
+    crowd_name: "Bob's Donuts",
+    my_location: [-140, 10]
+  }
+
+  var map = {
+    inside: false
+  }
+
+  // Implement pan functionality
+  var $crowd = document.querySelector('#crowdmap')
+
+  let crowd = panzoom($crowd, {
+    smoothScroll: false,
+    maxZoom: 1,
+    minZoom: 1,
+    bounds: true,
+    boundsPadding: 0.1
+  });
+
+  function calculateNewPosition(x, y) {
+    /*
+    Calculates difference between load position (as delivered from firebase) and
+    */
+    var newPosition = [_DB.my_location[0] - x, _DB.my_location[1] - y]
+
+    return newPosition
+  }
+
+  // crowd.on('pan', function(e) {
+  //   console.log('Fired when the `element` is being panned', e);
+  // });
+
+  crowd.on('panend', function(e) {
+    console.log('Fired when pan ended', e);
+
+    // update firebase with my new position
+    console.group('I have moved here:')
+    const panPosition = crowd.getTransform()
+    console.info(panPosition)
+    console.groupEnd()
+
+    newPos = calculateNewPosition(panPosition['x'], panPosition['y'])
+    console.group('Updating location in DB...')
+    console.info(newPos)
+    console.groupEnd()
+
+    // check if outside
+    if (newPos[0] < -60 || newPos[1] < -60) {
+      map.inside = false
+      console.log('You left the crowd :(') // should be some audio feedback (wah wah :/)
+    }
+    else [
+      map.inside = true
+    ]
+
+    // update stream accordingly
+  });
+
+  </script>
 </body>
+</html>

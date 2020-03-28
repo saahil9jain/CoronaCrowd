@@ -7,3 +7,46 @@ body {
   min-height:300px;
   width:100%;
 }
+
+
+/* Crowd page */
+body#crowd {
+  background:whitesmoke;
+}
+
+#crowdmap-wrapper {
+  background-color:white;
+  position:relative;
+  outline:0;
+  cursor:move;
+}
+
+#crowdmap {
+  height:600px;
+  border:4px solid darkgray;
+  border-radius:10px;
+  width:800px;
+  margin-left:150px;
+  position:relative;
+}
+
+.person {
+  position:absolute;
+  left:100px;
+  top:100px;
+  width:50px;
+  height:50px;
+  background-color:lightgray;
+  background-size:cover;
+  border-radius:50%;
+}
+
+.person#me {
+  position:absolute;
+  left:10px;
+  top:10px;
+  width:70px;
+  height:70px;
+  z-index:100;
+  background-color:darkgray;
+}
