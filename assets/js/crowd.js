@@ -1,9 +1,11 @@
-const _DB = {
+var _DB = {
   crowd_name: "Bob's Donuts",
   crowd_id: "eFlOVqORasM9qspBq0gv", // fb document ID for testing
-  my_id: "W5pJMKroXd9FeCA2NEId", // test
+  my_id: "OyHKgIOsy2BfVW69kyjf", // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
   my_location: [-140, 10]
 }
+
+_DB.my_id = prompt('Enter my_id to connect:')
 
 var map = {
   inside: false
