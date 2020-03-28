@@ -3,14 +3,26 @@
 <head>
   <title>{{Crowd}} - Corona Crowd</title>
   <link rel='stylesheet' href='assets/css/style.css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body id='crowd'>
   <!-- map -->
-  <section class='crowd' id='app'>
+<div id='app' v-bind:class="'scene-'+scene">
+  <section class='crowd' >
     <header>
       <h1>Bookshop</h1>
       <p>{{ people.length + 1 }} here</p>
     </header>
+    <div class='modal' id='welcome' v-if="scene == 'interstitial'">
+      <h1>Welcome to {{ crowd.title }}!</h1>
+      <p>Corona Crowd is a safe and inclusive space. No abuse is tolerated here, and a dedicated crowd host from {{ crowd.title }} is also with us. Please review the <a href='#rules'>crowd rules</a> before joining.</p>
+      <p>Please upload a photo of your face (from your computer or using your webcam) to join. This is stored securely on Corona Crowd servers and never shared with any third parties.</p>
+      <button id='share-face' v-on:click="prepareCamera()"><span class="material-icons">face</span> Share face</button>
+      <div id="my_camera"></div>
+      <button v-on:click="takeSnapshot()">Take snapshot</button>
+    </div>
+    <div class='modal-bg' v-if="scene == 'interstitial'"></div>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
         <div class='person' style='background-image:url("assets/img/person1.png")'></div>
@@ -19,18 +31,21 @@
 
         <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
       </div>
-      <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
+      <div class='person' id='me' v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')' }"></div>
     </div>
   </section>
   <hr>
   <section class='help'>
     <h3>How it works</h3>
     <p>1. Plug in your headphones/turn up your sound for the best experience
-      <br>2. Drag the map to explore the crowd around you
-      <br>3. Stay put when you join an interesting conversation</p>
+    <br>2. Drag the map to explore the crowd around you
+    <br>3. Stay put when you join an interesting conversation</p>
   </section>
   <footer>
   </footer>
+
+</div>
+
   <!-- (!) Development Vue, switch before shifting to prod -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -40,6 +55,9 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 
   <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
+
+  <!-- Webcam -->
+  <script src='assets/js/webcam.min.js'></script>
 
   <script src='assets/js/crowd.js'></script>
 </body>

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 body {
   margin:0;
   padding:0;
+  font-family:'Inter', Arial, sans-serif;
 }
 
 #map {
@@ -12,6 +15,12 @@ body {
 /* Crowd page */
 body#crowd {
   background:whitesmoke;
+}
+
+#app {
+  overflow:visible;
+  height:100%;
+  position:absolute
 }
 
 #crowdmap-wrapper {
@@ -48,6 +57,104 @@ body#crowd {
   top:10px;
   width:70px;
   height:70px;
-  z-index:100;
+  z-index:10;
   background-color:darkgray;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 10px 15px;
+  border: 0;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 400;
+  background: whitesmoke;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; /* alignment for material icons */
+  align-items: center; /* alignment for material icons */
+  -webkit-transition: all .1s;
+  -moz-transition: all .1s
+  transition: all .1s
+}
+
+button .material-icons {
+  margin-right:10px;
+}
+
+/* Modals */
+
+.modal-bg {
+    z-index: 90;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.8);
+    top: 0;
+    left: 0;
+}
+
+.modal {
+  /* This way it could be display flex or grid or whatever also. */
+ display: block;
+
+ /* Probably need media queries here */
+ width: 600px;
+ max-width: 100%;
+ border-radius:4px;
+
+ height: 400px;
+ max-height: 100%;
+
+ position: fixed;
+
+ z-index: 100;
+
+ left: 50%;
+ top: 50%;
+
+ /* Use this for centering if unknown width/height */
+ transform: translate(-50%, -50%);
+
+ /* If known, negative margins are probably better (less chance of blurry text). */
+ /* margin: -200px 0 0 -200px; */
+
+ background: white;
+ box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+
+#app.scene-interstitial {
+  /* overflow-y:hidden; */
+  overflow:hidden;
+}
+
+/* Welcome modal */
+
+.modal#welcome {
+  text-align:center;
+}
+
+#welcome p {
+  margin:0 40px;
+  line-height:1.4;
+  margin-bottom:15px;
+}
+
+#share-face {
+  background-color:rgba(219,53,53,.2);
+  color:rgba(219,53,53,1);
+  margin:auto;
+  margin-top:40px;
+}
+
+#share-face:hover {
+  background-color:rgba(219,53,53,.3);
+}
+
+#share-face:focus {
+  background-color:rgba(219,53,53,1);
+  color:white;
 }
