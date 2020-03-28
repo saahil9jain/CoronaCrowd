@@ -2,20 +2,22 @@
 <html>
 <head>
   <title>{{Crowd}} - Corona Crowd</title>
-  <link rel='stylesheet' href='assets/style.css'>
+  <link rel='stylesheet' href='assets/css/style.css'>
 </head>
 <body id='crowd'>
   <!-- map -->
-  <section class='crowd'>
+  <section class='crowd' id='app'>
     <header>
       <h1>Bookshop</h1>
-      <p>21 here</p>
+      <p>{{ people.length + 1 }} here</p>
     </header>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
         <div class='person' style='background-image:url("assets/img/person1.png")'></div>
         <div class='person' style='left:250px;top:130px;background-image:url("assets/img/person2.png")'></div>
         <div class='person' style='left:180px;top:80px;background-image:url("assets/img/person3.png")'></div>
+
+        <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
       </div>
       <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
     </div>
@@ -29,68 +31,16 @@
   </section>
   <footer>
   </footer>
+  <!-- (!) Development Vue, switch before shifting to prod -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+  <!-- Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+
   <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
-  <script>
 
-  const _DB = {
-    crowd_name: "Bob's Donuts",
-    my_location: [-140, 10]
-  }
-
-  var map = {
-    inside: false
-  }
-
-  // Implement pan functionality
-  var $crowd = document.querySelector('#crowdmap')
-
-  let crowd = panzoom($crowd, {
-    smoothScroll: false,
-    maxZoom: 1,
-    minZoom: 1,
-    bounds: true,
-    boundsPadding: 0.1
-  });
-
-  function calculateNewPosition(x, y) {
-    /*
-    Calculates difference between load position (as delivered from firebase) and
-    */
-    var newPosition = [_DB.my_location[0] - x, _DB.my_location[1] - y]
-
-    return newPosition
-  }
-
-  // crowd.on('pan', function(e) {
-  //   console.log('Fired when the `element` is being panned', e);
-  // });
-
-  crowd.on('panend', function(e) {
-    console.log('Fired when pan ended', e);
-
-    // update firebase with my new position
-    console.group('I have moved here:')
-    const panPosition = crowd.getTransform()
-    console.info(panPosition)
-    console.groupEnd()
-
-    newPos = calculateNewPosition(panPosition['x'], panPosition['y'])
-    console.group('Updating location in DB...')
-    console.info(newPos)
-    console.groupEnd()
-
-    // check if outside
-    if (newPos[0] < -60 || newPos[1] < -60) {
-      map.inside = false
-      console.log('You left the crowd :(') // should be some audio feedback (wah wah :/)
-    }
-    else [
-      map.inside = true
-    ]
-
-    // update stream accordingly
-  });
-
-  </script>
+  <script src='assets/js/crowd.js'></script>
 </body>
 </html>
