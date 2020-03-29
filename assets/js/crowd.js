@@ -1,18 +1,17 @@
+// this is presumably loaded from some database in the back-end (flask or node?)
 var _DB = {
   crowd_name: "Bob's Donuts",
   crowd_id: "eFlOVqORasM9qspBq0gv", // fb document ID for testing
-  my_id: "OyHKgIOsy2BfVW69kyjf", // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
+  my_id: 'anonymous', // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
   my_location: [-140, 10]
 }
 
-_DB.my_id = prompt('Enter my_id to connect:')
+// _DB.my_id = prompt('Enter my_id to connect:')
+// only my_ids that match ones in DB will work
 
 var map = {
   inside: false
 }
-
-
-
 
 // Load people with firebase
 var firebaseConfig = {
@@ -30,14 +29,17 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 
-
-
 var app = new Vue({
   el: '#app',
   data: {
     inside: false,
     people: [],
-    me: null
+    crowd: {
+      title: _DB.crowd_name
+    },
+    my_avatar: 'assets/img/me.png',
+    me: null,
+    scene: 'interstitial'
   },
   mounted() {
     // load the people
@@ -100,6 +102,28 @@ var app = new Vue({
 
   },
   methods: {
+    prepareCamera() {
+      // takes a photo
+      Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+      });
+      Webcam.attach('#my_camera');
+    },
+    takeSnapshot() {
+      // take snapshot and get image data
+      Webcam.snap( function(data_uri) {
+        // update local avatar
+        app.my_avatar = data_uri
+      })
+
+      // [] upload data uri to firebase/AWS as photo for processing
+
+      // switch scene (close modal)
+      this.scene = 'crowd'
+    },
     addPerson(person) {
       person.pos = {
         x: person.location[0],
@@ -117,18 +141,17 @@ var app = new Vue({
       })
       .then(function() {
           console.log("Document successfully updated!");
+          app.anonymous = false
       })
       .catch(function(error) {
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
+          app.anonymous = true
       });
 
     }
   }
 })
-
-
-
 
 
 // Implement pan functionality
@@ -175,9 +198,10 @@ crowd.on('panend', function(e) {
     map.inside = false
     console.log('You left the crowd :(') // should be some audio feedback (wah wah :/)
   }
-  else [
+  else {
     map.inside = true
-  ]
+    console.log('You entered the crowd :)') // should be some audio feedback (wah wah :/)
+  }
 
   // update stream accordingly
 });
