@@ -95,6 +95,8 @@ button .material-icons {
     background-color: rgba(0,0,0,.8);
     top: 0;
     left: 0;
+    backdrop-filter: blur(4px);
+
 }
 
 .modal {
@@ -156,5 +158,21 @@ button .material-icons {
 
 #share-face:focus {
   background-color:rgba(219,53,53,1);
+  color:white;
+}
+
+#take-snapshot {
+  background-color:rgba(27,163,122,.2);
+  color:rgba(27,163,122,1);
+  margin:auto;
+  margin-top:40px;
+}
+
+#take-snapshot:hover {
+  background-color:rgba(27,163,122,.3);
+}
+
+#take-snapshot:focus {
+  background-color:rgba(27,163,122,1);
   color:white;
 }

@@ -6,7 +6,7 @@ var _DB = {
   my_location: [-140, 10]
 }
 
-// _DB.my_id = prompt('Enter my_id to connect:')
+_DB.my_id = prompt('Enter my_id to connect: (Use OyHKgIOsy2BfVW69kyjf, W5pJMKroXd9FeCA2NEId, or k5uYov4IgMMjK35QvQ9T for testing)')
 // only my_ids that match ones in DB will work
 
 var map = {
@@ -39,7 +39,8 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'interstitial'
+    scene: 'interstitial',
+    camera_on: false
   },
   mounted() {
     // load the people
@@ -111,6 +112,7 @@ var app = new Vue({
         jpeg_quality: 90
       });
       Webcam.attach('#my_camera');
+      this.camera_on = true
     },
     takeSnapshot() {
       // take snapshot and get image data
