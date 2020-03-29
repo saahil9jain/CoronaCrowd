@@ -240,6 +240,15 @@ var app = new Vue({
 //   // update stream accordingly
 // });
 
-window.onbeforeunload = function(){
+// window.onbeforeunload = function(){
+//     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
+// }
+
+window.addEventListener("beforeunload", function(evt) {
+    // Delete on exit
     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
-}
+
+    delete e['returnValue'];
+
+    return null;
+});
