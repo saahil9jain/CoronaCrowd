@@ -484,11 +484,11 @@ var rtc = {
 
 function calculate_volume(x1, x2, y1, y2) {
 
-  console.log("coordinates for volume calculation");
-  console.log(x1);
-  console.log(x2);
-  console.log(y1);
-  console.log(y2);
+  // console.log("coordinates for volume calculation");
+  // console.log(x1);
+  // console.log(x2);
+  // console.log(y1);
+  // console.log(y2);
 
   var distance_squared = (x2 - x1)^2 + (y2 - y1)^2;
 
@@ -509,6 +509,11 @@ function adjust_volume(remote_id, new_volume) {
     remoteStream = rtc.remoteStreams[i];
     var id = remoteStream.getId();
     if (id == remote_id) {
+
+      new_volume = Math.round(new_volume);
+
+      console.log("new volume = " + new_volume);
+
       remoteStream.setAudioVolume(new_volume);
       console.log("Updated volume of " + remote_id + " to " + new_volume);
     }
