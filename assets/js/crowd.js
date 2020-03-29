@@ -48,6 +48,7 @@ var app = new Vue({
   data: {
     inside: false,
     people: [],
+    topics: [],
     crowd: {
       title: _DB.crowd_name
     },
@@ -76,6 +77,16 @@ var app = new Vue({
     //     });
 
     // listen for updates
+    db.collection("topics").where("crowd_id", "==", _DB.crowd_id)
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            var topic = change.doc.data()
+            app.addTopic(topic)
+          }
+        })
+      });
+
     db.collection("people").where("crowd_id", "==", _DB.crowd_id)
       .onSnapshot(function(snapshot) {
           snapshot.docChanges().forEach(function(change) {
@@ -153,6 +164,10 @@ var app = new Vue({
       }
       this['people'].push(person)
       console.log(this.people)
+    },
+    addTopic(topic) {
+      this['topics'].push(topic)
+      console.log(this.topics)
     },
     pushMovement(newPos) {
       // send my new movement to firebase
