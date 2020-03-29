@@ -3,7 +3,7 @@ var _DB = {
   crowd_name: "Bob's Donuts",
   crowd_id: "eFlOVqORasM9qspBq0gv", // fb document ID for testing
   my_id: 'anonymous', // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
-  my_location: [100, -70] // starting location
+  my_location: [100, -70] // starting location, just outside/above the crowd
 }
 
 _DB.my_id = prompt('Enter my_id to connect: (Use OyHKgIOsy2BfVW69kyjf, W5pJMKroXd9FeCA2NEId, or k5uYov4IgMMjK35QvQ9T for testing)')
@@ -51,20 +51,6 @@ var app = new Vue({
     }
   },
   mounted() {
-    // load the people
-    // db.collection("people").where("crowd_id", "==", _DB.crowd_id)
-    //     .get()
-    //     .then(function(querySnapshot) {
-    //         querySnapshot.forEach(function(doc) {
-    //             // doc.data() is never undefined for query doc snapshots
-    //             var person = doc.data()
-    //             app.addPerson(person)
-    //         });
-    //     })
-    //     .catch(function(error) {
-    //         console.log("Error getting documents: ", error);
-    //     });
-
     // listen for updates
     db.collection("people").where("crowd_id", "==", _DB.crowd_id)
       .onSnapshot(function(snapshot) {
