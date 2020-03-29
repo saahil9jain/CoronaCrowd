@@ -6,9 +6,6 @@ var _DB = {
   my_location: [-140, 10]
 }
 
-// _DB.my_id = prompt('Enter my_id to connect:')
-// only my_ids that match ones in DB will work
-
 var map = {
   inside: false
 }
@@ -28,6 +25,24 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
+// _DB.my_id = prompt('Enter my_id to connect:')
+// only my_ids that match ones in DB will work
+let newRef = db.collection('people').doc()
+var addNewPerson = newRef.set({
+   avatar: "assets/img/me.png",
+   crowd_id: _DB.crowd_id,
+   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
+ });
+_DB.my_id = newRef.id
+console.log("My ID: ", _DB.my_id)
+
+// var ref = db_database.ref("people")
+// var newRef = ref.push({
+//   avatar: "assets/img/me.png",
+//   crowd_id: _DB.crowd_id,
+//   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
+// });
+// _DB.my_id = newRef.key;
 
 var app = new Vue({
   el: '#app',
