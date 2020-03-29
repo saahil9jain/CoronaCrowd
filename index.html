@@ -76,24 +76,24 @@
     var map = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
-      center: [-122.65, 45.52], // starting position
-      zoom: 12 // starting zoom
+      center: [0, 0], // starting position
+      zoom: 1// starting zoom
     });
 
     // prepare marker data
     var geojson = {
       type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [-77.032, 38.913]
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Washington, D.C.'
-        }
-      },
+      features: [//{
+      //   type: 'Feature',
+      //   geometry: {
+      //     type: 'Point',
+      //     coordinates: [-77.032, 38.913]
+      //   },
+      //   properties: {
+      //     title: 'Crowd (beta 1)',
+      //     description: 'Washington, D.C.'
+      //   }
+      // },
       {
         type: 'Feature',
         geometry: {
@@ -101,8 +101,8 @@
           coordinates: [-122.414, 37.776]
         },
         properties: {
-          title: 'Mapbox',
-          description: 'San Francisco, California'
+          title: 'Crowd (beta)',
+          description: 'San Francisco, California<div class="action"><a href="crowd.html" class="button button--crowdlaunch"><span class="material-icons">people_alt</span> Visit</a></div>'
         }
       }]
     };
@@ -122,6 +122,8 @@
         .addTo(map);
 
     })
+
+    map.fire('click', { lngLat: [-77.032, 38.913] })
 
 
     /* Some map API stuff to use:

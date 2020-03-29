@@ -115,6 +115,10 @@ button .material-icons, .button .material-icons {
   font-family: 'Inter', Arial, sans-serif;
 }
 
+.mapboxgl-popup-content .action {
+  padding-top:10px;
+}
+
 
 /* Crowd page */
 body#crowd {
