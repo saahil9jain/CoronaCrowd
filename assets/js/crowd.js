@@ -3,7 +3,7 @@ var _DB = {
   crowd_name: "Bob's Donuts",
   crowd_id: "eFlOVqORasM9qspBq0gv", // fb document ID for testing
   my_id: 'anonymous', // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
-  my_location: [-140, 10]
+  my_location: [100, -70]
 }
 
 var map = {
@@ -55,7 +55,11 @@ var app = new Vue({
     my_avatar: 'assets/img/me.png',
     me: null,
     scene: 'interstitial',
-    camera_on: false
+    camera_on: false,
+    my_saved_location: {
+      x: _DB.my_location[0],
+      y: _DB.my_location[1]
+    }
   },
   mounted() {
     // load the people
@@ -171,59 +175,58 @@ var app = new Vue({
 })
 
 
-// Implement pan functionality
-var $crowd = document.querySelector('#crowdmap')
-
-let crowd = panzoom($crowd, {
-  smoothScroll: false,
-  maxZoom: 1,
-  minZoom: 1,
-  bounds: true,
-  boundsPadding: 0.1
-});
-
-function calculateNewPosition(x, y) {
-  /*
-  Calculates difference between load position (as delivered from firebase) and
-  */
-  var newPosition = [_DB.my_location[0] - x, _DB.my_location[1] - y]
-
-  return newPosition
-}
-
-// crowd.on('pan', function(e) {
-//   console.log('Fired when the `element` is being panned', e);
+// // Implement pan functionality
+// var $crowd = document.querySelector('#crowdmap')
+//
+// let crowd = panzoom($crowd, {
+//   smoothScroll: false,
+//   maxZoom: 1,
+//   minZoom: 1,
+//   bounds: true,
+//   boundsPadding: 0.1
 // });
-
-crowd.on('panend', function(e) {
-  console.log('Fired when pan ended', e);
-
-  // update firebase with my new position
-  console.group('I have moved here:')
-  const panPosition = crowd.getTransform()
-  console.info(panPosition)
-  console.groupEnd()
-
-  newPos = calculateNewPosition(panPosition['x'], panPosition['y'])
-  console.group('Updating location in DB...')
-  console.info(newPos)
-  app.pushMovement(newPos)
-  console.groupEnd()
-
-  // check if outside
-  if (newPos[0] < -60 || newPos[1] < -60) {
-    map.inside = false
-    console.log('You left the crowd :(') // should be some audio feedback (wah wah :/)
-  }
-  else {
-    map.inside = true
-    console.log('You entered the crowd :)') // should be some audio feedback (wah wah :/)
-  }
-
-  // update stream accordingly
-});
+//
+// function calculateNewPosition(x, y) {
+//   /*
+//   Calculates difference between load position (as delivered from firebase) and
+//   */
+//   var newPosition = [_DB.my_location[0] - x, _DB.my_location[1] - y]
+//
+//   return newPosition
+// }
+//
+// // crowd.on('pan', function(e) {
+// //   console.log('Fired when the `element` is being panned', e);
+// // });
+//
+// crowd.on('panend', function(e) {
+//   console.log('Fired when pan ended', e);
+//
+//   // update firebase with my new position
+//   console.group('I have moved here:')
+//   const panPosition = crowd.getTransform()
+//   console.info(panPosition)
+//   console.groupEnd()
+//
+//   newPos = calculateNewPosition(panPosition['x'], panPosition['y'])
+//   console.group('Updating location in DB...')
+//   console.info(newPos)
+//   app.pushMovement(newPos)
+//   console.groupEnd()
+//
+//   // check if outside
+//   if (newPos[0] < -60 || newPos[1] < -60) {
+//     map.inside = false
+//     console.log('You left the crowd :(') // should be some audio feedback (wah wah :/)
+//   }
+//   else {
+//     map.inside = true
+//     console.log('You entered the crowd :)') // should be some audio feedback (wah wah :/)
+//   }
+//
+//   // update stream accordingly
+// });
 
 window.onbeforeunload = function(){
     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();;
 }
-

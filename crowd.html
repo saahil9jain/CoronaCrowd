@@ -6,7 +6,7 @@
   <link rel='stylesheet' href='assets/css/style.css'>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
@@ -124,19 +124,6 @@
       </div>
     </div>
     <div class='modal-bg' v-if="scene == 'interstitial'"></div>
-    <div id='crowdmap-wrapper'>
-      <div id='crowdmap'>
-
-        <div class='person' style='background-image:url("assets/img/person1.png")'></div>
-<!--         <div class='person' style='background-image:url("assets/img/person1.png")'></div>
->>>>>>> dev-create_people
-        <div class='person' style='left:250px;top:130px;background-image:url("assets/img/person2.png")'></div>
-        <div class='person' style='left:180px;top:80px;background-image:url("assets/img/person3.png")'></div>
- -->
-        <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
-
-      </div>
-      <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
 
       <!-- local video stream -->
       <div class="video-view-custom">
@@ -145,9 +132,19 @@
         <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
       </div>
 
-      <div class='person' id='me' v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')' }"></div>
+      <!-- draggable crowd map -->
+      <div id="outerContainer">
+       <div id="container">
+         <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
+         <div id="avatar-me" v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')', left: my_saved_location.x + 'px', top: my_saved_location.y + 'px' }"></div>
+       </div>
+      </div>
+
     </div>
   </section>
+
+
+
   <hr>
   <section class='help'>
     <h3>How it works</h3>
@@ -175,6 +172,8 @@
   <script src='assets/js/webcam.min.js'></script>
 
   <script src='assets/js/crowd.js'></script>
+
+  <script src='assets/js/drag.crowd.js'></script>
 
   <!-- Agora scripts -->
   <script src="vendor/jquery.min.js"></script>
