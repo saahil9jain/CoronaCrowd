@@ -19,11 +19,11 @@ container.addEventListener("mousemove", drag, false);
 
 function dragStart(e) {
   if (e.type === "touchstart") {
-    initialX = e.touches[0].clientX - xOffset;
-    initialY = e.touches[0].clientY - yOffset;
+    initialX = e.touches[0].clientX;
+    initialY = e.touches[0].clientY;
   } else {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
+    initialX = e.clientX;
+    initialY = e.clientY;
   }
 
   if (e.target === dragItem) {
@@ -37,20 +37,13 @@ function dragEnd(e) {
 
   active = false;
 
-  // calculate position: currentX is relative to center, not left and top
-  var actualX = _DB.my_location[0] + currentX
-  var actualY = _DB.my_location[1] + currentY
+  var actualY = parseInt(dragItem.style.top, 10) + yOffset;
+  var actualX = parseInt(dragItem.style.left, 10) + xOffset;
 
-  
-  console.log("initialX = " + initialX);
-  console.log("initialY = " + initialY);
-  console.log("_DB.my_location[0] = " + _DB.my_location[0]);
-  console.log("_DB.my_location[1] = " + _DB.my_location[1]);
-  console.log("currentX = " + currentX);
-  console.log("currentY = " + currentY);
-
-  console.log("actualX = " + actualX);
-  console.log("actualY = " + actualY);
+  // also update locally
+  app['my_saved_location']['x'] = actualX;
+  app['my_saved_location']['y'] = actualY;
+  dragItem.style.transform = "none";
 
   // update firebase with new position
   var newPos = [actualX, actualY]
@@ -81,5 +74,6 @@ function drag(e) {
 }
 
 function setTranslate(xPos, yPos, el) {
+
   el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
 }

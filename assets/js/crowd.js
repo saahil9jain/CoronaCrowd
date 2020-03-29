@@ -204,19 +204,13 @@ var app = new Vue({
         y: person.location[1]
       }
       this['people'].push(person)
-      console.log(this.people)
+      console.log(this.people)  
     },
     addTopic(topic) {
       this['topics'].push(topic)
       console.log(this.topics)
     },
     pushMovement(newPos) {
-
-      // also update locally
-      app['my_saved_location']['x'] = newPos[0];
-      app['my_saved_location']['y'] = newPos[1];
-
-      // also update app.me?
 
       // send my new movement to firebase
       var meRef = db.collection("people").doc(_DB.my_id);
