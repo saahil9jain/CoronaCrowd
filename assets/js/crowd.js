@@ -248,7 +248,7 @@ window.addEventListener("beforeunload", function(evt) {
     // Delete on exit
     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
 
-    delete e['returnValue'];
+    delete evt['returnValue'];
 
     return null;
 });
