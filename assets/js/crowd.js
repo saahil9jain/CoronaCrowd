@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'interstitial',
+    scene: 'crowd',
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],
@@ -134,7 +134,7 @@ var app = new Vue({
     takeSnapshot() {
       // take snapshot and get image data
       Webcam.snap( function(data_uri) {
-             
+
       // Add new user
       let newRef = db.collection('people').doc()
       var addNewPerson = newRef.set({

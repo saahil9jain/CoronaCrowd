@@ -21,6 +21,8 @@ button, .button {
   text-align: center;
   border-radius: 6px;
   cursor: pointer;
+  -webkit-user-select: none;
+  user-select:none;
   display: inline-flex; /* alignment for material icons */
   align-items: center; /* alignment for material icons */
   -webkit-transition: all .1s;
@@ -137,6 +139,63 @@ body#crowd {
 }
 
 
+/*
+*
+* Crowd
+*
+* */
+
+/* Header */
+#crowd .topbar {
+  background: whitesmoke;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 80;
+  font-size: 1em;
+  /* height: 60px; */
+  width: 100%;
+  margin: 0;
+  padding-top: 10px;
+  text-align: center;
+  border-bottom: 1px solid #e4e4e4;
+  box-shadow: 0 0 15px #e4e4e4c7;
+}
+
+.topbar h1 {
+  color: black;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+#crowd .topbar p {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10px;
+  color: #8e8e8e;
+  font-size: .9em;
+}
+
+.button--home {
+    position: absolute;
+    left: 10px;
+    color: #1271C9;
+    font-size: 1em;
+}
+
+.button--help {
+    position: absolute;
+    right: 10px;
+    color:#F86B4C
+}
+
+#crowd .button:active {
+    opacity: .7
+}
+
+
 /* Crowd space design */
 
 #container {
@@ -150,6 +209,7 @@ body#crowd {
   border-radius: 7px;
   position:relative;
   touch-action: none;
+  background-size:contain; /* for custom floorplans */
 }
 
 #container .person {
@@ -280,9 +340,24 @@ body#crowd {
  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
 }
 
+.modal h1 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.modal h3 {
+    font-weight: 600;
+    text-align: center;
+    font-size: 2em;
+}
+
 #app.scene-interstitial {
   /* overflow-y:hidden; */
   overflow:hidden;
+}
+
+.modal .button--close {
+  color:gray;
 }
 
 /* Welcome modal */

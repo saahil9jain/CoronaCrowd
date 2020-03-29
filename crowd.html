@@ -11,104 +11,14 @@
 </head>
 <body id='crowd'>
 
- <!-- for joining a channel -->
-  <form id="form" class="row col l12 s12">
-    <div class="row container col l12 s12">
-      <div class="col" style="min-width: 433px; max-width: 443px">
-        <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
-          <div class="row card-content" style="margin-bottom: 0px;">
-              <div class="input-field">
-                <label for="appID" class="active">App ID</label>
-                <input type="text" placeholder="App ID" name="appID">
-              </div>
-              <div class="input-field">
-                <label for="channel" class="active">Channel</label>
-                <input type="text" placeholder="channel" name="channel">
-              </div>
-              <div class="input-field">
-                <label for="token" class="active">Token</label>
-                <input type="text" placeholder="token" name="token">
-              </div>
-              <div class="row" style="margin: 0">
-                <div class="col s12">
-                <button class="btn btn-raised btn-primary waves-effect waves-light" id="join">JOIN</button>
-                <button class="btn btn-raised btn-primary waves-effect waves-light" id="leave">LEAVE</button>
-                <button class="btn btn-raised btn-primary waves-effect waves-light" id="publish">PUBLISH</button>
-                <button class="btn btn-raised btn-primary waves-effect waves-light" id="unpublish">UNPUBLISH</button>
-                </div>
-              </div>
-          </div>
-        </div>
-        <ul class="collapsible card agora-secondary-border" style="margin-top: .4rem; border: 1px ">
-          <li>
-            <div class="collapsible-header agora-secondary-bg">
-              <h8 class="center-align">ADVANCED SETTINGS</h8>
-            </div>
-            <div class="collapsible-body card-content">
-              <div class="row">
-                <div class="col s12">
-                  <div class="input-field">
-                    <label for="UID" class="active">UID</label>
-                    <input type="number" placeholder="UID" name="uid">
-                  </div>
-                  <div class="input-field">
-                    <label for="cameraId" class="active">CAMERA</label>
-                    <select name="cameraId" id="cameraId"></select>
-                  </div>
-                  <div class="input-field">
-                    <label for="microphoneId" class="active">MICROPHONE</label>
-                    <select name="microphoneId" id="microphoneId"></select>
-                  </div>
-                  <div class="input-field">
-                    <label for="cameraResolution" class="active">CAMERA RESOLUTION</label>
-                    <select name="cameraResolution" id="cameraResolution"></select>
-                  </div>
-                  <div class="row col s12">
-                    <div class="row">
-                      <label for="mode" class="active">MODE</label>
-                    </div>
-                    <div class="row">
-                      <label>
-                        <input type="radio" class="with-gap" name="mode" value="live" checked />
-                        <span>live</span>
-                      </label>
-
-                      <label>
-                        <input type="radio" class="with-gap" name="mode" value="rtc" />
-                        <span>rtc</span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="row col s12">
-                    <div class="row">
-                      <label for="codec" class="active">CODEC</label>
-                    </div>
-                    <div class="row">
-                      <label>
-                        <input type="radio" class="with-gap" name="codec" value="h264" checked />
-                        <span>h264</span>
-                      </label>
-
-                      <label>
-                        <input type="radio" class="with-gap" name="codec" value="vp8" />
-                        <span>vp8</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </form>
-
-
-
   <!-- map -->
 <div id='app' v-bind:class="'scene-'+scene">
   <section class='crowd' >
-    <header>
+    <header class='topbar navshown'>
+      <div class='topbar__nav'>
+        <a class='button button--home' href='index.html'><span class="material-icons">home</span> Home</a>
+        <a class='button button--help' v-on:click="scene = 'help'"><span class="material-icons">help</span> Help</a>
+      </div>
       <h1>{{ crowd.title }}</h1>
       <p>{{ people.length }} other people here</p>
     </header>
@@ -122,7 +32,7 @@
         <button v-if="camera_on" id='take-snapshot' v-on:click="takeSnapshot()"><span class="material-icons">camera</span> Take snapshot</button>
       </div>
     </div>
-    <div class='modal-bg' v-if="scene == 'interstitial'"></div>
+    <div class='modal-bg' v-if="scene == 'interstitial' || scene == 'help'" v-on:click="scene = 'crowd'"></div>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
       <!-- local video stream -->
@@ -147,9 +57,104 @@
   </section>
 
 
+  <!-- for joining a channel -->
+   <form id="form" class="row col l12 s12">
+     <div class="row container col l12 s12">
+       <div class="col" style="min-width: 433px; max-width: 443px">
+         <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
+           <div class="row card-content" style="margin-bottom: 0px;">
+               <div class="input-field">
+                 <label for="appID" class="active">App ID</label>
+                 <input type="text" placeholder="App ID" name="appID">
+               </div>
+               <div class="input-field">
+                 <label for="channel" class="active">Channel</label>
+                 <input type="text" placeholder="channel" name="channel">
+               </div>
+               <div class="input-field">
+                 <label for="token" class="active">Token</label>
+                 <input type="text" placeholder="token" name="token">
+               </div>
+               <div class="row" style="margin: 0">
+                 <div class="col s12">
+                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="join">JOIN</button>
+                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="leave">LEAVE</button>
+                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="publish">PUBLISH</button>
+                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="unpublish">UNPUBLISH</button>
+                 </div>
+               </div>
+           </div>
+         </div>
+         <ul class="collapsible card agora-secondary-border" style="margin-top: .4rem; border: 1px ">
+           <li>
+             <div class="collapsible-header agora-secondary-bg">
+               <h8 class="center-align">ADVANCED SETTINGS</h8>
+             </div>
+             <div class="collapsible-body card-content">
+               <div class="row">
+                 <div class="col s12">
+                   <div class="input-field">
+                     <label for="UID" class="active">UID</label>
+                     <input type="number" placeholder="UID" name="uid">
+                   </div>
+                   <div class="input-field">
+                     <label for="cameraId" class="active">CAMERA</label>
+                     <select name="cameraId" id="cameraId"></select>
+                   </div>
+                   <div class="input-field">
+                     <label for="microphoneId" class="active">MICROPHONE</label>
+                     <select name="microphoneId" id="microphoneId"></select>
+                   </div>
+                   <div class="input-field">
+                     <label for="cameraResolution" class="active">CAMERA RESOLUTION</label>
+                     <select name="cameraResolution" id="cameraResolution"></select>
+                   </div>
+                   <div class="row col s12">
+                     <div class="row">
+                       <label for="mode" class="active">MODE</label>
+                     </div>
+                     <div class="row">
+                       <label>
+                         <input type="radio" class="with-gap" name="mode" value="live" checked />
+                         <span>live</span>
+                       </label>
+
+                       <label>
+                         <input type="radio" class="with-gap" name="mode" value="rtc" />
+                         <span>rtc</span>
+                       </label>
+                     </div>
+                   </div>
+                   <div class="row col s12">
+                     <div class="row">
+                       <label for="codec" class="active">CODEC</label>
+                     </div>
+                     <div class="row">
+                       <label>
+                         <input type="radio" class="with-gap" name="codec" value="h264" checked />
+                         <span>h264</span>
+                       </label>
+
+                       <label>
+                         <input type="radio" class="with-gap" name="codec" value="vp8" />
+                         <span>vp8</span>
+                       </label>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </form>
+
+
+
 
   <hr>
-  <section class='help'>
+  <section class='help modal' v-if="scene == 'help'">
+    <a href='#' class='button button--close' v-on:click="scene = 'crowd'"><i class="material-icons">close</i> Close</a>
     <h3>How it works</h3>
     <p>1. Plug in your headphones/turn up your sound for the best experience.
     <br>2. Move around the map with your keyboard or by dragging the screen.
