@@ -1,0 +1,6 @@
+# python/flasky stuff
+__pycache__
+venv/
+
+# mac
+.DS_Store
