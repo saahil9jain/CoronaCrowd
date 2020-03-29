@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'crowd', // testing, change back to 'interstitial'
+    scene: 'interstitial', // testing, change back to 'interstitial'
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],
@@ -489,11 +489,13 @@ function calculate_volume(x1, x2, y1, y2) {
   // console.log(y1);
   // console.log(y2);
 
-  var distance_squared = (x2 - x1)^2 + (y2 - y1)^2;
+  var distance_squared = Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2);
 
-  const scaling = 100; // this might need to be changed later
+  const scaling = 100000; // this might need to be changed later
   var volume = scaling/distance_squared;
   
+  console.log("calculate_volume: volume = " + volume);
+
   // cap on volume
   if (volume > 100) {
     volume = 100;
