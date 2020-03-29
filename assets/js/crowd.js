@@ -86,6 +86,33 @@ var app = new Vue({
                 }
                 console.log("Added person: ", change.doc.data());
               }
+
+              // I moved
+              if (change.type === "modified" && change.doc.id == _DB.my_id) {
+
+                // need to adjust everyone else's volume
+                for (var i = 0; i < app.people.length; i++) {
+                  var other_person = app.people[i];
+
+                  // change their remote audio
+
+                  // updated person's location
+                  var x2 = other_person.location[0];
+                  var y2 = other_person.location[1];
+
+                  // my new location
+                  var x1 = app['my_saved_location']['x'];
+                  var y1 = app['my_saved_location']['y'];
+
+                  // calculate new volume based on distance
+                  var new_volume = calculate_volume(x1, x2, y1, y2);
+                  var remote_id = other_person.id;
+                  adjust_volume(remote_id, new_volume);
+                }
+
+              }
+
+              // someone else moved
               if (change.type === "modified" && change.doc.id != _DB.my_id) {
                   // find person with that ID
                   var idToLookFor = change.doc.id
@@ -109,7 +136,18 @@ var app = new Vue({
 
                   // change their remote audio
 
+                  // updated person's location
+                  var x2 = updatedPerson.location[0];
+                  var y2 = updatedPerson.location[1];
 
+                  // my location
+                  var x1 = app['my_saved_location']['x'];
+                  var y1 = app['my_saved_location']['y'];
+
+                  // calculate new volume based on distance
+                  var new_volume = calculate_volume(x1, x2, y1, y2);
+                  var remote_id = idToLookFor;
+                  adjust_volume(remote_id, new_volume);
 
               }
               if (change.type === "removed") {
@@ -173,6 +211,13 @@ var app = new Vue({
       console.log(this.topics)
     },
     pushMovement(newPos) {
+
+      // also update locally
+      app['my_saved_location']['x'] = newPos[0];
+      app['my_saved_location']['y'] = newPos[1];
+
+      // also update app.me?
+
       // send my new movement to firebase
       var meRef = db.collection("people").doc(_DB.my_id);
 
@@ -188,7 +233,6 @@ var app = new Vue({
           console.error("Error updating document: ", error);
           app.anonymous = true
       });
-
     }
   }
 })
@@ -432,8 +476,16 @@ var rtc = {
 };
 
 function calculate_volume(x1, x2, y1, y2) {
+
+  console.log("coordinates for volume calculation");
+  console.log(x1);
+  console.log(x2);
+  console.log(y1);
+  console.log(y2);
+
   var distance_squared = (x2 - x1)^2 + (y2 - y1)^2;
-  const scaling = 100;
+
+  const scaling = 100; // this might need to be changed later
   var volume = scaling/distance_squared;
   
   // cap on volume
@@ -587,9 +639,12 @@ function join (rtc, option) {
      *      All users in the same channel should have the same type (number or string) of uid.
      *      If you use a number as the user ID, it should be a 32-bit unsigned integer with a value ranging from 0 to (232-1).
     **/
-    rtc.client.join(option.token ? option.token : null, option.channel, option.uid ? +option.uid : null, function (uid) {
+
+    // use firebase id as uid for agora
+    rtc.client.join(option.token ? option.token : null, option.channel, _DB.my_id, function (uid) {
       Toast.notice("join channel: " + option.channel + " success, uid: " + uid);
       console.log("join channel: " + option.channel + " success, uid: " + uid);
+      console.log("_DB.my_id: " + _DB.my_id);
       rtc.joined = true;
 
       rtc.params.uid = uid;
