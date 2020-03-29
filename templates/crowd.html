@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <title>Corona Crowd</title>
-  <link rel="stylesheet" href="/assets/css/common.css" />
-  <link rel='stylesheet' href='/assets/css/style.css'>
+  <link rel="stylesheet" href="/static/css/common.css" />
+  <link rel='stylesheet' href='/static/css/style.css'>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
@@ -169,16 +169,28 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 
   <!-- Webcam -->
-  <script src='/assets/js/webcam.min.js'></script>
+  <script src='/static/js/webcam.min.js'></script>
 
-  <script src='/assets/js/crowd.js'></script>
+  <script>
 
-  <script src='/assets/js/drag.crowd.js'></script>
+  // this is presumably loaded from some database in the back-end (flask or node?)
+  var _DB = {
+    crowd_name: "{{ crowd.name }}",
+    crowd_id: '{{ crowd.id }}',
+    my_id: 'anonymous', // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
+    my_location: [100, -70]
+  }
+
+  </script>
+
+  <script src='/static/js/crowd.js'></script>
+
+  <script src='/static/js/drag.crowd.js'></script>
 
   <!-- Agora scripts -->
-  <script src="/assets/vendor/jquery.min.js"></script>
-  <script src="/assets/vendor/materialize.min.js"></script>
-  <script src="/assets/js/AgoraRTCSDK.js"></script>
+  <script src="/static/vendor/jquery.min.js"></script>
+  <script src="/static/vendor/materialize.min.js"></script>
+  <script src="/static/js/AgoraRTCSDK.js"></script>
   <script>
     console.log("agora sdk version: " + AgoraRTC.VERSION + " compatible: " + AgoraRTC.checkSystemRequirements());
     var resolutions = [

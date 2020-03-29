@@ -1,13 +1,4 @@
-// change vue delimieter
 
-
-// this is presumably loaded from some database in the back-end (flask or node?)
-var _DB = {
-  crowd_name: "Bob's Donuts",
-  crowd_id: "eFlOVqORasM9qspBq0gv", // fb document ID for testing
-  my_id: 'anonymous', // test 1) OyHKgIOsy2BfVW69kyjf, 2) W5pJMKroXd9FeCA2NEId, 3) k5uYov4IgMMjK35QvQ9T
-  my_location: [100, -70]
-}
 
 var map = {
   inside: false
@@ -31,7 +22,7 @@ var db = firebase.firestore();
 // Add new user
 let newRef = db.collection('people').doc()
 var addNewPerson = newRef.set({
-   avatar: "assets/img/me.png",
+   avatar: "/static/img/me.png",
    crowd_id: _DB.crowd_id,
    location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
  });
@@ -56,7 +47,7 @@ var app = new Vue({
     crowd: {
       title: _DB.crowd_name
     },
-    my_avatar: 'assets/img/me.png',
+    my_avatar: '/static/img/me.png',
     me: null,
     scene: 'interstitial',
     camera_on: false,

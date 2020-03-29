@@ -1,4 +1,4 @@
-# CoronaCrowd
+# Corona Crowd
 
 ##  Components
 1. **Home**: the world where people can find their local crowds

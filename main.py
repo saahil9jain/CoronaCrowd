@@ -1,10 +1,14 @@
 from flask import Flask, render_template
-app = Flask(__name__, static_url_path='/assets/')
+app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Corona Crowd - home page'
+    return render_template('home.html')
 
 @app.route('/crowd/<crowd_id>')
 def crowd(crowd_id=None):
-    return render_template('crowd.html', crowd_id=crowd_id)
+    crowd_obj = {
+        'id' : crowd_id,
+        'name': 'Dunkin donuts'
+    }
+    return render_template('crowd.html', crowd=crowd_obj)
