@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Corona Crowd</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel='stylesheet' href='assets/css/style.css'>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class='logo'>Corona Crowd</div>
+  </header>
+
+  <div id='map'></div>
+  <section class='header'>
+    <h1>Community in the time of corona</h1>
+    <p>In times of quarantine, people all over the world are fighting physical isolation by returning to community spaces in online form.</p>
+    <div class='action'>
+      <button ><a href="crowd.html">Host a crowd</a></button>
+    </div>
+    <p><small>If you manage a restaurant, pub, museum, library or other community space – bring the conversation online by creating an immersive space on CoronaCrowd!</small></p>
+  </section>
+  <hr>
+  <section >
+    <h3>What is this?</h3>
+    <p>Lots of people are feeling isolated or lonely without the social contact they find at their local pub, library, barbershop, or restaurant. At the same time, cultural centers and businesses are affected due to the lack of patronage caused by global quarantine. </p>
+    <p>We wanted to bridge this digital gap by building an authentic digital space for people to spend time together, much as they do in the physical world.</p>
+  </section>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyA-TtymaKaQYS1LiedsCmgdj3kV5Z2TtOo",
+      authDomain: "corona-crowd-cf195.firebaseapp.com",
+      databaseURL: "https://corona-crowd-cf195.firebaseio.com",
+      projectId: "corona-crowd-cf195",
+      storageBucket: "corona-crowd-cf195.appspot.com",
+      messagingSenderId: "698495134070",
+      appId: "1:698495134070:web:5784b0cf5b69ecf9cef257",
+      measurementId: "G-94GEBWFH9T"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    // Setup Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmVhY2hneWFuIiwiYSI6ImNqOG9yZzA2ajA2bW0yd3J6djh4NHBucmIifQ.5xzvq2yQS1ZTRgJsKuYKNg';
+
+    var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
+      center: [-122.65, 45.52], // starting position
+      zoom: 12 // starting zoom
+    });
+
+
+    // listen for pan events
+    map.on('moveend', function(event) {
+        console.log(event)
+    });
+
+    /* Some map API stuff to use:
+
+    On homepage
+    - Markers for active crowds (https://docs.mapbox.com/mapbox-gl-js/example/add-image-generated/)
+    - Marker popup on hover (https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/)
+    - If we want to force people to find spaces in their area? (https://docs.mapbox.com/mapbox-gl-js/example/restrict-bounds/)
+
+    On crowd
+    - ...
+
+    */
+
+  </script>
+</body>
+</html>
