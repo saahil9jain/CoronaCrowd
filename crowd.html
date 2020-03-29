@@ -126,12 +126,6 @@
     <div class='modal-bg' v-if="scene == 'interstitial'"></div>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
-
-<!--  <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
-
-      </div>
-      <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
- -->
       <!-- local video stream -->
       <div class="video-view-custom">
         <div id="local_stream" class="video-view-custom"></div>
@@ -143,6 +137,9 @@
       <div id="outerContainer">
        <div id="container">
          <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
+         <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
+           <span class='tooltiptext'>{{topic.name}}</span>
+         </div>
          <div id="avatar-me" v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')', left: my_saved_location.x + 'px', top: my_saved_location.y + 'px' }"></div>
        </div>
       </div>

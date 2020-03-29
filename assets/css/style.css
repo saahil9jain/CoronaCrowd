@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
-  margin:0;
+  margin:50px;
   padding:0;
   font-family:'Inter', Arial, sans-serif;
 }
@@ -93,6 +93,38 @@ body#crowd {
   height:70px;
   z-index:10;
   background-color:darkgray;
+}
+
+.topic {
+  position:absolute;
+  width:10px;
+  height:10px;
+  background-size:cover;
+  background-color:red;
+  box-shadow: 0 0 5px 10px red;
+  border-radius:50%;
+  -webkit-transition: all .4s
+}
+
+.topic .tooltiptext {
+  visibility: hidden;
+  width: 175px;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity .1s;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 105%;
+}
+
+.topic:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 button {

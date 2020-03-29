@@ -25,29 +25,12 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-// Add new user
-let newRef = db.collection('people').doc()
-var addNewPerson = newRef.set({
-   avatar: "assets/img/me.png",
-   crowd_id: _DB.crowd_id,
-   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
- });
-_DB.my_id = newRef.id
-console.log("My ID: ", _DB.my_id)
-
-// var ref = db_database.ref("people")
-// var newRef = ref.push({
-//   avatar: "assets/img/me.png",
-//   crowd_id: _DB.crowd_id,
-//   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
-// });
-// _DB.my_id = newRef.key;
-
 var app = new Vue({
   el: '#app',
   data: {
     inside: false,
     people: [],
+    topics: [],
     crowd: {
       title: _DB.crowd_name
     },
@@ -76,6 +59,16 @@ var app = new Vue({
     //     });
 
     // listen for updates
+    db.collection("topics").where("crowd_id", "==", _DB.crowd_id)
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            var topic = change.doc.data()
+            app.addTopic(topic)
+          }
+        })
+      });
+
     db.collection("people").where("crowd_id", "==", _DB.crowd_id)
       .onSnapshot(function(snapshot) {
           snapshot.docChanges().forEach(function(change) {
@@ -91,7 +84,7 @@ var app = new Vue({
                 else {
                   app.addPerson(person)
                 }
-
+                console.log("Added person: ", change.doc.data());
               }
               if (change.type === "modified" && change.doc.id != _DB.my_id) {
                   // find person with that ID
@@ -114,6 +107,11 @@ var app = new Vue({
                   console.log("Modified person: ", change.doc.data());
               }
               if (change.type === "removed") {
+                  // find person with that ID
+                  var idToLookFor = change.doc.id
+
+                  personIndex = app['people'].findIndex(x => x.id === idToLookFor)
+                  app['people'].splice(personIndex, 1);
                   console.log("Removed person: ", change.doc.data());
               }
           });
@@ -136,10 +134,20 @@ var app = new Vue({
     takeSnapshot() {
       // take snapshot and get image data
       Webcam.snap( function(data_uri) {
-        // update local avatar
-        app.my_avatar = data_uri
-        db.collection('people').doc(_DB.my_id).update({avatar: app.my_avatar})
-      })
+             
+      // Add new user
+      let newRef = db.collection('people').doc()
+      var addNewPerson = newRef.set({
+         avatar: data_uri,
+         crowd_id: _DB.crowd_id,
+         location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
+       });
+      _DB.my_id = newRef.id
+      console.log("My ID: ", _DB.my_id)
+
+      // update local avatar
+      app.my_avatar = data_uri;
+    })
 
       // [] upload data uri to firebase/AWS as photo for processing
 
@@ -153,6 +161,10 @@ var app = new Vue({
       }
       this['people'].push(person)
       console.log(this.people)
+    },
+    addTopic(topic) {
+      this['topics'].push(topic)
+      console.log(this.topics)
     },
     pushMovement(newPos) {
       // send my new movement to firebase
@@ -229,5 +241,5 @@ var app = new Vue({
 // });
 
 window.onbeforeunload = function(){
-    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();;
+    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
 }
