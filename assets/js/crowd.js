@@ -124,7 +124,8 @@ var app = new Vue({
         width: 320,
         height: 240,
         image_format: 'jpeg',
-        jpeg_quality: 90
+        jpeg_quality: 90,
+        flip_horiz: true
       });
       Webcam.attach('#my_camera');
       this.camera_on = true
