@@ -94,14 +94,14 @@ var app = new Vue({
               if (change.type === "modified" && change.doc.id == _DB.my_id) {
 
                 // need to adjust everyone else's volume
-                for (var i = 0; i < app.people.length; i++) {
-                  var other_person = app.people[i];
+                for (var i = 0; i < app['people'].length; i++) {
+                  var other_person = app['people'][i];
 
                   // change their remote audio
 
                   // updated person's location
-                  var x2 = other_person.location[0];
-                  var y2 = other_person.location[1];
+                  var x2 = other_person['pos']['x'];
+                  var y2 = other_person['pos']['y'];
 
                   // my new location
                   var x1 = app['my_saved_location']['x'];
@@ -129,7 +129,6 @@ var app = new Vue({
                     y: updatedPerson.location[1]
                   }
                   // existingPerson = newPerson
-
 
                   // console.log(app.people[foundindex])
 
@@ -483,11 +482,11 @@ var rtc = {
 
 function calculate_volume(x1, x2, y1, y2) {
 
-  // console.log("coordinates for volume calculation");
-  // console.log(x1);
-  // console.log(x2);
-  // console.log(y1);
-  // console.log(y2);
+  console.log("coordinates for volume calculation");
+  console.log("x1 = " + x1);
+  console.log("x2 = " + x2);
+  console.log("y1 = " + y1);
+  console.log("y2 = " + y2);
 
   var distance_squared = Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2);
 
