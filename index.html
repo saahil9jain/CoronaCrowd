@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Corona Crowd</title>
@@ -62,6 +61,33 @@
       center: [-122.65, 45.52], // starting position
       zoom: 12 // starting zoom
     });
+
+    // add markers
+    var geojson = {
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-77.032, 38.913]
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'Washington, D.C.'
+        }
+      },
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-122.414, 37.776]
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'San Francisco, California'
+        }
+      }]
+    };
 
 
     // listen for pan events
