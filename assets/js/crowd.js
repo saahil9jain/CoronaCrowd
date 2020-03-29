@@ -1,3 +1,6 @@
+// change vue delimieter
+
+
 // this is presumably loaded from some database in the back-end (flask or node?)
 var _DB = {
   crowd_name: "Bob's Donuts",
@@ -45,6 +48,7 @@ console.log("My ID: ", _DB.my_id)
 
 var app = new Vue({
   el: '#app',
+  delimeters: ["[[","]]"],
   data: {
     inside: false,
     people: [],

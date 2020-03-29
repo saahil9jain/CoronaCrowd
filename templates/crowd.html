@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <title>Corona Crowd</title>
-  <link rel="stylesheet" href="./assets/css/common.css" />
-  <link rel='stylesheet' href='assets/css/style.css'>
+  <link rel="stylesheet" href="/assets/css/common.css" />
+  <link rel='stylesheet' href='/assets/css/style.css'>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
@@ -104,18 +104,16 @@
     </div>
   </form>
 
-
-
   <!-- map -->
 <div id='app' v-bind:class="'scene-'+scene">
   <section class='crowd' >
     <header>
-      <h1>{{ crowd.title }}</h1>
-      <p>{{ people.length }} other people here</p>
+      <h1>[[ crowd.title ]]</h1>
+      <p>[[ people.length ]] other people here</p>
     </header>
     <div class='modal' id='welcome' v-if="scene == 'interstitial'">
-      <h1>Welcome to {{ crowd.title }}!</h1>
-      <p v-if="!camera_on">Corona Crowd is a safe and inclusive space. No abuse is tolerated here, and a dedicated crowd host from {{ crowd.title }} is also with us. Please review the <a href='#rules'>crowd rules</a> before joining.</p>
+      <h1>Welcome to [[ crowd.title ]]!</h1>
+      <p v-if="!camera_on">Corona Crowd is a safe and inclusive space. No abuse is tolerated here, and a dedicated crowd host from [[ crowd.title ]] is also with us. Please review the <a href='#rules'>crowd rules</a> before joining.</p>
       <p v-if="!camera_on">Please upload a photo of your face (from your computer or using your webcam) to join. This is stored securely on Corona Crowd servers and never shared with any third parties.</p>
       <button id='share-face' v-if="!camera_on" v-on:click="prepareCamera()"><span class="material-icons">face</span> Share face</button>
       <div class='snapshot-area'>
@@ -138,7 +136,7 @@
        <div id="container">
          <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
          <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
-           <span class='tooltiptext'>{{topic.name}}</span>
+           <span class='tooltiptext'>[[topic.name]]</span>
          </div>
          <div id="avatar-me" v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')', left: my_saved_location.x + 'px', top: my_saved_location.y + 'px' }"></div>
        </div>
@@ -170,19 +168,17 @@
   <!-- Firestore -->
   <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
 
-  <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
-
   <!-- Webcam -->
-  <script src='assets/js/webcam.min.js'></script>
+  <script src='/assets/js/webcam.min.js'></script>
 
-  <script src='assets/js/crowd.js'></script>
+  <script src='/assets/js/crowd.js'></script>
 
-  <script src='assets/js/drag.crowd.js'></script>
+  <script src='/assets/js/drag.crowd.js'></script>
 
   <!-- Agora scripts -->
-  <script src="vendor/jquery.min.js"></script>
-  <script src="vendor/materialize.min.js"></script>
-  <script src="assets/js/AgoraRTCSDK.js"></script>
+  <script src="/assets/vendor/jquery.min.js"></script>
+  <script src="/assets/vendor/materialize.min.js"></script>
+  <script src="/assets/js/AgoraRTCSDK.js"></script>
   <script>
     console.log("agora sdk version: " + AgoraRTC.VERSION + " compatible: " + AgoraRTC.checkSystemRequirements());
     var resolutions = [
