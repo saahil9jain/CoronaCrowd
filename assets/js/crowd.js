@@ -222,3 +222,8 @@ crowd.on('panend', function(e) {
 
   // update stream accordingly
 });
+
+window.onbeforeunload = function(){
+    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();;
+}
+
