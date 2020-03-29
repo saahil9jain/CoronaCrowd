@@ -1,21 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
-  margin:50px;
+  margin:0;
   padding:0;
   font-family:'Inter', Arial, sans-serif;
 }
 
+/* General UI */
+button, .button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 10px 15px;
+  text-decoration:none;
+  border: 0;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 400;
+  background: whitesmoke;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex; /* alignment for material icons */
+  align-items: center; /* alignment for material icons */
+  -webkit-transition: all .1s;
+  -moz-transition: all .1s
+  transition: all .1s
+}
 
-/* World map */
+button .material-icons, .button .material-icons {
+  margin-right:10px;
+}
+
+
+/*
+*
+* Home page
+*
+*/
+
+.topbar {
+  font-size:1em;
+  margin:0 50px
+}
+
+.span {
+  margin:50px auto;
+  max-width:800px;
+  width:80%;
+}
+
+.hero h1 {
+  text-align:center;
+  margin-bottom:0;
+  font-size:2em;
+}
+
+.hero p {
+  text-align:center;
+  line-height:1.5;
+  font-size:1.2em;
+}
+
+.action {
+  text-align:center;
+}
+
+.action a.button {
+  background-color:rgba(18, 113, 201, .17);
+  color:rgba(18, 113, 201, 1);
+}
+
+.action a.button:hover {
+  background-color:rgba(18, 113, 201, .3);
+  color:rgba(18, 113, 201, 1)
+}
+
+.action a.button:active {
+  background-color:rgba(18, 113, 201, 1);
+  color:white
+}
+
+#host-help-text {
+  font-size:1em;
+  color:gray;
+  line-height:1.5;
+  max-width:60%;
+  margin:20px auto;
+}
+
+/* Home page :: Map */
 
 #map {
-  min-height:300px;
+  min-height:350px;
+  height:30vh;
   width:100%;
 }
 
-.marker {
-  background-image: url('mapbox-icon.png');
+.map-marker {
+  background-image: url('../img/marker-icon.png');
   background-size: cover;
   width: 50px;
   height: 50px;
@@ -23,7 +106,14 @@ body {
   cursor: pointer;
 }
 
+.mapboxgl-popup {
+  max-width: 200px;
+}
 
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+}
 
 
 /* Crowd page */
@@ -141,29 +231,6 @@ body#crowd {
   opacity: 1;
 }
 
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 10px 15px;
-  border: 0;
-  font-size: 1em;
-  font-family: inherit;
-  font-weight: 400;
-  background: whitesmoke;
-  text-align: center;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex; /* alignment for material icons */
-  align-items: center; /* alignment for material icons */
-  -webkit-transition: all .1s;
-  -moz-transition: all .1s
-  transition: all .1s
-}
-
-button .material-icons {
-  margin-right:10px;
-}
 
 /* Modals */
 

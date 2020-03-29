@@ -7,27 +7,45 @@
   <link rel='stylesheet' href='assets/css/style.css'>
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header class='topbar'>
     <h1 class='logo'>Corona Crowd</h1>
   </header>
 
   <div id='map'></div>
-  <section class='header'>
+  <section class='hero span'>
     <h1>Community in the time of corona</h1>
     <p>In times of quarantine, people all over the world are fighting physical isolation by returning to community spaces in online form.</p>
     <div class='action'>
-      <button ><a href="crowd.html">Host a crowd</a></button>
+      <a href="mailto:hi@coronacrowd.fake.website?subject=Host%20a%20crowd%20inquiry&body=Hi!%20I'm%20interested%20in%20hosting%20a%20crowd%20on%20Corona%20Crowd%20and%20would%20love%20to%20learn%20more.%20Can%20you%20send%20me%20some%20details%20on%20how%20I%20can%20register%20a%20crowd%20host%20and%20get%20my%20community%20space%20up%20and%20running%3FThanks!" class="button">
+        <span class="material-icons">contact_support</span> Host a crowd</a>
     </div>
-    <p><small>If you manage a restaurant, pub, museum, library or other community space – bring the conversation online by creating an immersive space on CoronaCrowd!</small></p>
+    <p id='host-help-text'>If you manage a restaurant, pub, museum, library or other community space – bring the conversation online by creating an immersive space on Corona Crowd!</p>
   </section>
   <hr>
-  <section >
+  <section class='span'>
     <h3>What is this?</h3>
     <p>Lots of people are feeling isolated or lonely without the social contact they find at their local pub, library, barbershop, or restaurant. At the same time, cultural centers and businesses are affected due to the lack of patronage caused by global quarantine. </p>
     <p>We wanted to bridge this digital gap by building an authentic digital space for people to spend time together, much as they do in the physical world.</p>
   </section>
+  <section class='span'>
+    <h3>How does it work?</h3>
+    <p>We’ve combined the real-time technologies of the Internet, including technologies like RTC audio streaming, real-time mapping/localization, voice balancing, and spatial awareness.</p>
+    <p>This simulates the experience of navigating a crowded space with a few groups of people, and then settling into a conversation you find interesting.</p>
+  </section>
+  <section class='span'>
+    <h3>The fine print</h3>
+    <p>We have a zero-tolerance policy towards bullying, harassment, or abuse of any sort on the platform. We have taken some steps to uphold the quality of the community:</p>
+    <ol>
+      <li>Crowds can only convene during open hours, which are set by community spaces</li>
+      <li>A dedicated Crowd Host from the hosting organization is present</li>
+      <li>No personal contact info, such as names or phone numbers, is ever revealed to anyone without explicit consent</li>
+      <li>People can report any abuse to their Crowd Host at any time using a secure messaging platform </li>
+  </section>
+
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -62,7 +80,7 @@
       zoom: 12 // starting zoom
     });
 
-    // add markers
+    // prepare marker data
     var geojson = {
       type: 'FeatureCollection',
       features: [{
@@ -89,11 +107,22 @@
       }]
     };
 
+    // add markers to map
+    geojson.features.forEach(function(marker) {
 
-    // listen for pan events
-    map.on('moveend', function(event) {
-        console.log(event)
-    });
+      // create a HTML element for each feature
+      var el = document.createElement('div');
+      el.className = 'map-marker';
+
+      // make a marker for each feature and add to the map
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .addTo(map);
+
+    })
+
 
     /* Some map API stuff to use:
 
