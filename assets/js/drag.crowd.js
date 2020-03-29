@@ -41,6 +41,17 @@ function dragEnd(e) {
   var actualX = _DB.my_location[0] + currentX
   var actualY = _DB.my_location[1] + currentY
 
+  
+  console.log("initialX = " + initialX);
+  console.log("initialY = " + initialY);
+  console.log("_DB.my_location[0] = " + _DB.my_location[0]);
+  console.log("_DB.my_location[1] = " + _DB.my_location[1]);
+  console.log("currentX = " + currentX);
+  console.log("currentY = " + currentY);
+
+  console.log("actualX = " + actualX);
+  console.log("actualY = " + actualY);
+
   // update firebase with new position
   var newPos = [actualX, actualY]
   console.group('Updating location in DB...')
