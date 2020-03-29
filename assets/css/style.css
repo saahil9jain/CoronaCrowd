@@ -277,11 +277,9 @@ body#crowd {
 .topic:hover {
   box-shadow: 0 0 8px 15px rgba(219,53,53,.2);
   position:absolute;
-  width:30px;
-  height:30px;
+  transform: scale(1.5);
   background-size:cover;
   background-color:red;
-  box-shadow: 0 0 2px 2px red;
   border-radius:50%;
   -webkit-transition: all .4s
 }
