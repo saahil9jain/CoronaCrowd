@@ -9,6 +9,11 @@ var initialY;
 var xOffset = 0;
 var yOffset = 0;
 
+// for key control
+var xKeyOffset = 0;
+var yKeyOffset = 0;
+
+
 container.addEventListener("touchstart", dragStart, false);
 container.addEventListener("touchend", dragEnd, false);
 container.addEventListener("touchmove", drag, false);
@@ -16,6 +21,92 @@ container.addEventListener("touchmove", drag, false);
 container.addEventListener("mousedown", dragStart, false);
 container.addEventListener("mouseup", dragEnd, false);
 container.addEventListener("mousemove", drag, false);
+
+// add event listeners for keydown (to prevent default scrolling behavior) and keyup (to update my position)
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
+
+function handleKeyDown(e) {
+  console.group('Keydown occured!')
+
+  const key = e.keyCode
+  const arrow_keys = [38, 40, 37, 39]
+
+  // prevent page scroll
+  if (arrow_keys.includes(key)) {
+    e.preventDefault()
+    console.log('arrow key was pressed! stopping document from scrolling')
+  }
+
+  console.groupEnd()
+}
+
+function handleKeyUp(e) {
+  // check which arrow keys
+  console.group('Keyup occured!')
+  switch(e.keyCode) {
+    case 38:
+      // up
+      console.log('up')
+
+      // move
+      var yTranslate = yKeyOffset - 50
+      setTranslate(xKeyOffset, yTranslate, dragItem);
+
+      // increment
+      yKeyOffset = yTranslate
+
+      break;
+    case 40:
+      // down
+      console.log('down')
+
+      // move
+      var yTranslate = yKeyOffset + 50
+      setTranslate(xKeyOffset, yTranslate, dragItem);
+
+      // increment
+      yKeyOffset = yTranslate
+
+      break;
+    case 37:
+      // left
+      console.log('left')
+
+      // move
+      var xTranslate = xKeyOffset - 50
+      setTranslate(xTranslate, yKeyOffset, dragItem);
+
+      // increment
+      xKeyOffset = xTranslate
+
+      break;
+    case 39:
+      // right
+      console.log('right')
+
+      // move
+      var xTranslate = xKeyOffset + 50
+      setTranslate(xTranslate, yKeyOffset, dragItem);
+
+      // increment
+      xKeyOffset = xTranslate
+
+      break;
+  }
+  console.groupEnd()
+
+  // calculate position with offset
+  const newPos = calculateMyNewPos(xKeyOffset, yKeyOffset)
+
+  // update for drag
+  initialX = xKeyOffset
+  initialY = yKeyOffset
+
+  // update firebase with new position
+  app.pushMovement(newPos)
+}
+
 
 function dragStart(e) {
   if (e.type === "touchstart") {
@@ -37,16 +128,21 @@ function dragEnd(e) {
 
   active = false;
 
-  // calculate position: currentX is relative to center, not left and top
-  var actualX = _DB.my_location[0] + currentX
-  var actualY = _DB.my_location[1] + currentY
+  // calculate position with offset
+  const newPos = calculateMyNewPos(currentX, currentY)
 
   // update firebase with new position
-  var newPos = [actualX, actualY]
-  console.group('Updating location in DB...')
-  console.info(newPos)
   app.pushMovement(newPos)
-  console.groupEnd()
+}
+
+function calculateMyNewPos(translatedX, translatedY) {
+  // calculate position: currentX is relative to center, not left and top
+  var actualX = _DB.my_location[0] + translatedX
+  var actualY = _DB.my_location[1] + translatedY
+
+  var newPos = [actualX, actualY]
+
+  return newPos
 }
 
 function drag(e) {

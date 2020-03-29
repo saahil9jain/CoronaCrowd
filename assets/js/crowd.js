@@ -171,6 +171,10 @@ var app = new Vue({
     },
     pushMovement(newPos) {
       // send my new movement to firebase
+      console.group('Updating location in DB...')
+      console.info(newPos)
+      console.groupEnd()
+
       var meRef = db.collection("people").doc(_DB.my_id);
 
       return meRef.update({
@@ -185,6 +189,7 @@ var app = new Vue({
           console.error("Error updating document: ", error);
           app.anonymous = true
       });
+
 
     }
   }
