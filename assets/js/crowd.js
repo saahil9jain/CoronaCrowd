@@ -25,8 +25,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-// _DB.my_id = prompt('Enter my_id to connect:')
-// only my_ids that match ones in DB will work
+// Add new user
 let newRef = db.collection('people').doc()
 var addNewPerson = newRef.set({
    avatar: "assets/img/me.png",
@@ -128,7 +127,8 @@ var app = new Vue({
         width: 320,
         height: 240,
         image_format: 'jpeg',
-        jpeg_quality: 90
+        jpeg_quality: 90,
+        flip_horiz: true
       });
       Webcam.attach('#my_camera');
       this.camera_on = true
@@ -138,6 +138,7 @@ var app = new Vue({
       Webcam.snap( function(data_uri) {
         // update local avatar
         app.my_avatar = data_uri
+        db.collection('people').doc(_DB.my_id).update({avatar: app.my_avatar})
       })
 
       // [] upload data uri to firebase/AWS as photo for processing
@@ -158,7 +159,7 @@ var app = new Vue({
       var meRef = db.collection("people").doc(_DB.my_id);
 
       return meRef.update({
-          location: newPos
+          location: {0: newPos[0], 1: newPos[1]}
       })
       .then(function() {
           console.log("Document successfully updated!");

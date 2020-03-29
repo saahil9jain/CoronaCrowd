@@ -136,13 +136,14 @@ button .material-icons {
 .modal {
   /* This way it could be display flex or grid or whatever also. */
  display: block;
+ padding: 20px;
 
  /* Probably need media queries here */
  width: 600px;
  max-width: 100%;
  border-radius:4px;
 
- height: 400px;
+ height: 500px;
  max-height: 100%;
 
  position: fixed;

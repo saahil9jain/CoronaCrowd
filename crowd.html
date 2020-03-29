@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{{ crowd.title }} - Corona Crowd</title>
+  <title>Corona Crowd</title>
   <link rel="stylesheet" href="./assets/css/common.css" />
   <link rel='stylesheet' href='assets/css/style.css'>
   <meta charset="UTF-8">
@@ -124,7 +124,14 @@
       </div>
     </div>
     <div class='modal-bg' v-if="scene == 'interstitial'"></div>
+    <div id='crowdmap-wrapper'>
+      <div id='crowdmap'>
 
+<!--  <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
+
+      </div>
+      <div class='person' id='me' style='background-image:url("assets/img/me.png")'></div>
+ -->
       <!-- local video stream -->
       <div class="video-view-custom">
         <div id="local_stream" class="video-view-custom"></div>
