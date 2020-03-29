@@ -1,0 +1,9 @@
+# Mac/OSX
+.DS_Store
+
+# python/flask
+venv/
+venv.bak/
+__pycache__/
+*.py[cod]
+*$py.class
