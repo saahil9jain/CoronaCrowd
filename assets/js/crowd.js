@@ -109,7 +109,7 @@ var app = new Vue({
                   // make the changes
                   console.log("Modified person: ", change.doc.data());
               }
-              if (change.type == "modified") {
+              if (change.type == "modified" && change.doc.id == _DB.my_id) {
                   // add person to a group if they are near a hotspot 
                   var person = change.doc.data()
                   person.id = change.doc.id
@@ -123,7 +123,6 @@ var app = new Vue({
                      location: person.location
                    });
                   console.log("Created Group ID: ", ref.id)
-
               }
               if (change.type === "removed") {
                   // find person with that ID
