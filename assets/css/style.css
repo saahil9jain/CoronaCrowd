@@ -264,14 +264,18 @@ body#crowd {
 }
 
 .topic {
-  position:absolute;
-  width:10px;
-  height:10px;
-  background-size:cover;
-  background-color:red;
-  box-shadow: 0 0 5px 10px red;
-  border-radius:50%;
-  -webkit-transition: all .4s
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-size: cover;
+  background-color: #DB3535;
+  box-shadow: 0 0 5px 10px rgba(219, 53, 53, 0.12);
+  border-radius: 50%;
+  -webkit-transition: all .1s;
+}
+
+.topic:hover {
+  box-shadow: 0 0 8px 15px rgba(219,53,53,.2);
 }
 
 .topic .tooltiptext {
@@ -280,10 +284,11 @@ body#crowd {
   background-color: gray;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px;
   border-radius: 6px;
   opacity: 0;
-  transition: opacity .1s;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
   position: absolute;
   z-index: 1;
   top: -5px;
