@@ -84,7 +84,7 @@ var app = new Vue({
                 else {
                   app.addPerson(person)
                 }
-
+                console.log("Added person: ", change.doc.data());
               }
               if (change.type === "modified" && change.doc.id != _DB.my_id) {
                   // find person with that ID
@@ -107,6 +107,11 @@ var app = new Vue({
                   console.log("Modified person: ", change.doc.data());
               }
               if (change.type === "removed") {
+                  // find person with that ID
+                  var idToLookFor = change.doc.id
+
+                  personIndex = app['people'].findIndex(x => x.id === idToLookFor)
+                  app['people'].splice(personIndex, 1);
                   console.log("Removed person: ", change.doc.data());
               }
           });
@@ -129,6 +134,7 @@ var app = new Vue({
     takeSnapshot() {
       // take snapshot and get image data
       Webcam.snap( function(data_uri) {
+             
       // Add new user
       let newRef = db.collection('people').doc()
       var addNewPerson = newRef.set({
@@ -236,5 +242,4 @@ var app = new Vue({
 
 window.onbeforeunload = function(){
     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
-    return "Are you sure you want to leave?";
 }
