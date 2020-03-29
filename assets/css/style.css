@@ -165,7 +165,7 @@ button .material-icons {
   background-color:rgba(27,163,122,.2);
   color:rgba(27,163,122,1);
   margin:auto;
-  margin-top:40px;
+  margin-top:20px;
 }
 
 #take-snapshot:hover {
@@ -175,4 +175,12 @@ button .material-icons {
 #take-snapshot:focus {
   background-color:rgba(27,163,122,1);
   color:white;
+}
+
+#my_camera {
+  margin:auto;
+}
+
+#my_camera video {
+  border-radius:6px;
 }
