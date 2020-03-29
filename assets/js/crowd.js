@@ -178,7 +178,7 @@ var app = new Vue({
     takeSnapshot() {
       // take snapshot and get image data
       Webcam.snap( function(data_uri) {
-             
+
       // Add new user
       let newRef = db.collection('people').doc()
       var addNewPerson = newRef.set({
@@ -297,7 +297,9 @@ var app = new Vue({
 window.addEventListener("beforeunload", function(evt) {
     // Delete on exit
     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
-    delete e['returnValue'];
+
+    delete evt['returnValue'];
+
     return null;
 });
 
