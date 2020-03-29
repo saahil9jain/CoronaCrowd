@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>{{ crowd.title }} - Corona Crowd</title>
+  <link rel="stylesheet" href="./assets/css/common.css" />
   <link rel='stylesheet' href='assets/css/style.css'>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./assets/css/common.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
-
-
 <body id='crowd'>
 
  <!-- for joining a channel -->
@@ -107,10 +104,7 @@
     </div>
   </form>
 
-  <!-- agora scripts -->
-  <script src="vendor/jquery.min.js"></script>
-  <script src="vendor/materialize.min.js"></script>
-  <script src="assets/js/AgoraRTCSDK.js"></script>
+
 
   <!-- map -->
 <div id='app' v-bind:class="'scene-'+scene">
@@ -180,7 +174,10 @@
 
   <script src='assets/js/crowd.js'></script>
 
-  <!-- agora script -->
+  <!-- Agora scripts -->
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/materialize.min.js"></script>
+  <script src="assets/js/AgoraRTCSDK.js"></script>
   <script>
     console.log("agora sdk version: " + AgoraRTC.VERSION + " compatible: " + AgoraRTC.checkSystemRequirements());
     var resolutions = [
@@ -362,7 +359,7 @@
       params: {}
     };
 
-    
+
     function adjust_volume(remote_id, adjustment) {
       for(var i = 0; i < rtc.remoteStreams.length; i++) {
         remoteStream = rtc.remoteStreams[i];
@@ -408,7 +405,7 @@
       })
 
       // Occurs when the remote stream is added.
-      rtc.client.on("stream-added", function (evt) {  
+      rtc.client.on("stream-added", function (evt) {
         var remoteStream = evt.stream;
         var id = remoteStream.getId();
         Toast.info("stream-added uid: " + id)
