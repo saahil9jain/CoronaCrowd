@@ -221,7 +221,7 @@ body#crowd {
   position:absolute;
   height: 70px;
   background-color: rgb(18, 113, 201, .1);
-  border: 10px solid rgba(18, 113, 201, .1);
+  box-shadow: 0 0 0 1px goldenrod;
   border-radius: 50%;
   touch-action: none;
   user-select: none;
@@ -237,7 +237,7 @@ body#crowd {
   background-color: rgba(18, 113, 201, .7);
 }
 #avatar-me:hover {
-  border-width: 15px;
+  box-shadow: 0 0 0 3px goldenrod;
 }
 
 
@@ -276,6 +276,14 @@ body#crowd {
 
 .topic:hover {
   box-shadow: 0 0 8px 15px rgba(219,53,53,.2);
+  position:absolute;
+  width:30px;
+  height:30px;
+  background-size:cover;
+  background-color:red;
+  box-shadow: 0 0 2px 2px red;
+  border-radius:50%;
+  -webkit-transition: all .4s
 }
 
 .topic .tooltiptext {
