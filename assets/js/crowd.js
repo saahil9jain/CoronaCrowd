@@ -25,24 +25,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-// Add new user
-let newRef = db.collection('people').doc()
-var addNewPerson = newRef.set({
-   avatar: "assets/img/me.png",
-   crowd_id: _DB.crowd_id,
-   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
- });
-_DB.my_id = newRef.id
-console.log("My ID: ", _DB.my_id)
-
-// var ref = db_database.ref("people")
-// var newRef = ref.push({
-//   avatar: "assets/img/me.png",
-//   crowd_id: _DB.crowd_id,
-//   location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
-// });
-// _DB.my_id = newRef.key;
-
 var app = new Vue({
   el: '#app',
   data: {
@@ -147,10 +129,19 @@ var app = new Vue({
     takeSnapshot() {
       // take snapshot and get image data
       Webcam.snap( function(data_uri) {
-        // update local avatar
-        app.my_avatar = data_uri
-        db.collection('people').doc(_DB.my_id).update({avatar: app.my_avatar})
-      })
+      // Add new user
+      let newRef = db.collection('people').doc()
+      var addNewPerson = newRef.set({
+         avatar: data_uri,
+         crowd_id: _DB.crowd_id,
+         location: {0: _DB.my_location[0], 1: _DB.my_location[1]}
+       });
+      _DB.my_id = newRef.id
+      console.log("My ID: ", _DB.my_id)
+
+      // update local avatar
+      app.my_avatar = data_uri;
+    })
 
       // [] upload data uri to firebase/AWS as photo for processing
 
@@ -244,5 +235,6 @@ var app = new Vue({
 // });
 
 window.onbeforeunload = function(){
-    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();;
+    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
+    return "Are you sure you want to leave?";
 }
