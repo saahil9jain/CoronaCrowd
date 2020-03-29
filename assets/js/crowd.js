@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'crowd', // testing, change back to 'interstitial'
+    scene: 'interstitial', // testing, change back to 'interstitial'
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],
@@ -108,6 +108,22 @@ var app = new Vue({
 
                   // make the changes
                   console.log("Modified person: ", change.doc.data());
+              }
+              if (change.type == "modified") {
+                  // add person to a group if they are near a hotspot 
+                  var person = change.doc.data()
+                  person.id = change.doc.id
+
+                  group_members = []
+                  group_members.push(person.id)
+                  let ref = db.collection('groups').doc()
+                  var addNewPerson = ref.set({
+                     open: true,
+                     people_ids: group_members,
+                     location: person.location
+                   });
+                  console.log("Created Group ID: ", ref.id)
+
               }
               if (change.type === "removed") {
                   // find person with that ID
