@@ -117,10 +117,10 @@
       <h1>Welcome to {{ crowd.title }}!</h1>
       <p v-if="!camera_on">Corona Crowd is a safe and inclusive space. No abuse is tolerated here, and a dedicated crowd host from {{ crowd.title }} is also with us. Please review the <a href='#rules'>crowd rules</a> before joining.</p>
       <p v-if="!camera_on">Please upload a photo of your face (from your computer or using your webcam) to join. This is stored securely on Corona Crowd servers and never shared with any third parties.</p>
-      <button id='share-face' v-on:click="prepareCamera()"><span class="material-icons">face</span> Share face</button>
+      <button id='share-face' v-if="!camera_on" v-on:click="prepareCamera()"><span class="material-icons">face</span> Share face</button>
       <div class='snapshot-area'>
         <div id="my_camera"></div>
-        <button id='take-snapshot' v-on:click="takeSnapshot()"><span class="material-icons">camera</span> Take snapshot</button>
+        <button v-if="camera_on" id='take-snapshot' v-on:click="takeSnapshot()"><span class="material-icons">camera</span> Take snapshot</button>
       </div>
     </div>
     <div class='modal-bg' v-if="scene == 'interstitial'"></div>

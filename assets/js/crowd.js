@@ -7,6 +7,10 @@ var _DB = {
 }
 
 _DB.my_id = prompt('Enter my_id to connect: (Use OyHKgIOsy2BfVW69kyjf, W5pJMKroXd9FeCA2NEId, or k5uYov4IgMMjK35QvQ9T for testing)')
+if (!_DB.my_id) {
+  // user enters ''
+  _DB.my_id = 'anonymous'
+}
 // only my_ids that match ones in DB will work
 
 var map = {
