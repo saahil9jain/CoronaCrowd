@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'interstitial',
+    scene: 'crowd', // testing, change back to 'interstitial'
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],
@@ -64,6 +64,9 @@ var app = new Vue({
         snapshot.docChanges().forEach(function(change) {
           if (change.type === "added") {
             var topic = change.doc.data()
+            console.group('Received pre-seeded topic: '+topic.name);
+            console.log(topic)
+            console.groupEnd()
             app.addTopic(topic)
           }
         })

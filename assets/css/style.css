@@ -221,7 +221,8 @@ body#crowd {
   position:absolute;
   height: 70px;
   background-color: rgb(18, 113, 201, .1);
-  box-shadow: 0 0 0 1px goldenrod;
+  /* box-shadow: 0 0 0 1px goldenrod; */
+  box-shadow: 0 0 0 7px rgb(18, 113, 201, .1);
   border-radius: 50%;
   touch-action: none;
   user-select: none;
@@ -231,13 +232,16 @@ body#crowd {
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
-  -webkit-transition: background-color .1s, border-width .1s
+  -webkit-transition: box-shadow .1s
 }
-#avatar-me:active {
-  background-color: rgba(18, 113, 201, .7);
-}
+
 #avatar-me:hover {
-  box-shadow: 0 0 0 3px goldenrod;
+  /* box-shadow: 0 0 0 3px goldenrod; */
+  box-shadow: 0 0 0 10px rgb(18, 113, 201, .2);
+}
+
+#avatar-me:focus, #avatar-me:active {
+  box-shadow: 0 0 0 10px rgb(18, 113, 201, .7);
 }
 
 

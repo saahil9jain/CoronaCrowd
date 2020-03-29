@@ -49,7 +49,7 @@
          <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
            <span class='tooltiptext'>{{topic.name}}</span>
          </div>
-         <div id="avatar-me" v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')', left: my_saved_location.x + 'px', top: my_saved_location.y + 'px' }"></div>
+         <div id="avatar-me" class="pulse" v-bind:style="{ backgroundImage: 'url(' + my_avatar + ')', left: my_saved_location.x + 'px', top: my_saved_location.y + 'px' }"></div>
        </div>
       </div>
 
