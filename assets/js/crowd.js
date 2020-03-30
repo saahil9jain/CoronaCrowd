@@ -199,6 +199,10 @@ var app = new Vue({
 
       // switch scene (close modal)
       this.scene = 'crowd'
+
+      // automatically join the channel
+      join(rtc, option);
+
     },
     addPerson(person) {
       person.pos = {
@@ -482,12 +486,6 @@ var rtc = {
 
 function calculate_volume(x1, x2, y1, y2) {
 
-  console.log("coordinates for volume calculation");
-  console.log("x1 = " + x1);
-  console.log("x2 = " + x2);
-  console.log("y1 = " + y1);
-  console.log("y2 = " + y2);
-
   var distance_squared = Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2);
 
   const scaling = 100000; // this might need to be changed later
@@ -596,17 +594,28 @@ function handleEvents (rtc) {
   })
 }
 
-/**
-  * rtc: rtc object
-  * option: {
-  *  mode: string, 'live' | 'rtc'
-  *  codec: string, 'h264' | 'vp8'
-  *  appID: string
-  *  channel: string, channel name
-  *  uid: number
-  *  token; string,
-  * }
- **/
+// *
+//   * rtc: rtc object
+//   * option: {
+//   *  mode: string, 'live' | 'rtc'
+//   *  codec: string, 'h264' | 'vp8'
+//   *  appID: string
+//   *  channel: string, channel name
+//   *  uid: number
+//   *  token; string,
+//   * }
+//  *
+
+
+var option = {
+  mode: 'rtc',
+  codec: 'h264',
+  appID: 'e9a19ca1d2c64103a6bc88ad502b8213',
+  channel: 'test-channel',
+  uid: _DB.my_id,
+  token: '006e9a19ca1d2c64103a6bc88ad502b8213IADZWz1y9o3Aeu4oBleTre2f9KwFW3IzAHDkR3vu8jFzUWLMzZAAAAAAEACE31yhzp6CXgEAAQDOnoJe'
+}
+
 function join (rtc, option) {
   if (rtc.joined) {
     Toast.error("Your already joined");

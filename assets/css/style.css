@@ -378,13 +378,13 @@ body#crowd {
   overflow:hidden;
 }
 
-.modal .button--close {
+.custom-modal .button--close {
   color:gray;
 }
 
 /* Welcome modal */
 
-.modal#welcome {
+.custom-modal#welcome {
   text-align:center;
 }
 
