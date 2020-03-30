@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: 'assets/img/me.png',
     me: null,
-    scene: 'interstitial', // testing, change back to 'interstitial'
+    scene: 'crowd', // testing, change back to 'interstitial'
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],
@@ -175,6 +175,15 @@ var app = new Vue({
 
   },
   methods: {
+    closeModal() {
+      if (this.scene == 'interstitial') {
+        // modal cant be closed, they must take a photo to enter
+      }
+      else {
+        // close the modal
+        this.scene = 'crowd'
+      }
+    },
     prepareCamera() {
       // takes a photo
       Webcam.set({
@@ -221,7 +230,7 @@ var app = new Vue({
       }
       person.group = false;
       this['people'].push(person)
-      console.log(this.people)  
+      console.log(this.people)
     },
     addTopic(topic) {
       this['topics'].push(topic)
@@ -501,7 +510,7 @@ function calculate_volume(x1, x2, y1, y2) {
 
   const scaling = 100000; // this might need to be changed later
   var volume = scaling/distance_squared;
-  
+
   console.log("calculate_volume: volume = " + volume);
 
   // cap on volume

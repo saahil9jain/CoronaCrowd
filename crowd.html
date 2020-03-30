@@ -23,7 +23,8 @@
       </div>
       <h1>{{ crowd.title }}</h1>
       <p>
-        <span v-if="people.length">{{ people.length }} other people here</span>
+        <span v-if="people.length == 1">1 other person here</span>
+        <span v-else-if="people.length">{{ people.length }} other people here</span>
         <span v-else>You're the first one here</span>
       </p>
     </header>
@@ -37,7 +38,7 @@
         <button v-if="camera_on" id='take-snapshot' v-on:click="takeSnapshot()"><span class="material-icons">camera</span> Take snapshot</button>
       </div>
     </div>
-    <div class='modal-bg' v-if="scene == 'interstitial' || scene == 'help'" v-on:click="scene = 'crowd'"></div>
+    <div class='modal-bg' v-if="scene == 'interstitial' || scene == 'help'" v-on:click="closeModal()"></div>
     <div id='crowdmap-wrapper'>
       <div id='crowdmap'>
       <!-- local video stream -->
