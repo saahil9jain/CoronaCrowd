@@ -264,6 +264,17 @@ body#crowd {
   -webkit-transition: all .4s
 }
 
+.grouped {
+  position:absolute;
+  left:100px;
+  top:100px;
+  transform: scale(1.25);
+  background-color:lightgray;
+  background-size:cover;
+  border-radius:50%;
+  -webkit-transition: all .4s
+}
+
 .person#me {
   position:absolute;
   left:10px;
