@@ -50,7 +50,7 @@
       <!-- draggable crowd map -->
       <div id="outerContainer">
        <div id="container" style="background-image:url('assets/img/floorplan-shop.png')">
-         <div class='person' v-for="person in people" v-bind:class="{ crowd_host: person.is_host }" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }">
+         <div class='person' v-for="person in people" v-bind:class="{ grouped:person.grouped, crowd_host: person.is_host }" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }">
            <span class='opt-halo'></span>
            <span class='opt-description' v-if='person.is_host'>
              <span class='opt-description__name'>{{ person.name }}</span>

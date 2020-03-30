@@ -111,6 +111,11 @@ var app = new Vue({
                   var new_volume = calculate_volume(x1, x2, y1, y2);
                   var remote_id = other_person.id;
                   adjust_volume(remote_id, new_volume);
+                  if (new_volume > 3) {
+                    other_person.grouped = true
+                  } else {
+                    other_person.grouped = false
+                  }
                 }
 
               }
@@ -150,6 +155,11 @@ var app = new Vue({
                   var new_volume = calculate_volume(x1, x2, y1, y2);
                   var remote_id = idToLookFor;
                   adjust_volume(remote_id, new_volume);
+                  if (new_volume > 3) {
+                    other_person.grouped = true
+                  } else {
+                    other_person.grouped = false
+                  }
 
               }
               if (change.type === "removed") {
@@ -209,6 +219,7 @@ var app = new Vue({
         x: person.location[0],
         y: person.location[1]
       }
+      person.group = false;
       this['people'].push(person)
       console.log(this.people)  
     },
