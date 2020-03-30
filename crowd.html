@@ -18,11 +18,14 @@
   <section class='crowd' >
     <header class='topbar navshown'>
       <div class='topbar__nav'>
-        <a class='button button--home' href='index.html'><span class="material-icons">home</span> Home</a>
+        <a class='button button--home' href='/'><span class="material-icons">home</span> Home</a>
         <a class='button button--help' v-on:click="scene = 'help'"><span class="material-icons">help</span> Help</a>
       </div>
       <h1>{{ crowd.title }}</h1>
-      <p>{{ people.length }} other people here</p>
+      <p>
+        <span v-if="people.length">{{ people.length }} other people here</span>
+        <span v-else>You're the first one here</span>
+      </p>
     </header>
     <div class='custom-modal' id='welcome' v-if="scene == 'interstitial'">
       <h1>Welcome to {{ crowd.title }}!</h1>
@@ -46,8 +49,14 @@
 
       <!-- draggable crowd map -->
       <div id="outerContainer">
-       <div id="container" style="background-image:url('assets/img/floorplan-shop.png')">
-         <div class='person' v-for="person in people" v-bind:class="{grouped:person.grouped}" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
+       <div id="container" style="background-image:url('/assets/img/floorplan-shop.png')">
+         <div class='person' v-for="person in people" v-bind:class="{ grouped:person.grouped, crowd_host: person.is_host }" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }">
+           <span class='opt-halo'></span>
+           <span class='opt-description' v-if='person.is_host'>
+             <span class='opt-description__name'>{{ person.name }}</span>
+             <span class='opt-description__handle'>@ {{ person.org_associated }}</span>
+           </span>
+         </div>
          <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
            <span class='tooltiptext'>{{topic.name}}</span>
          </div>
@@ -90,7 +99,7 @@
          <ul class="collapsible card agora-secondary-border" style="margin-top: .4rem; border: 1px ">
            <li>
              <div class="collapsible-header agora-secondary-bg">
-               <h8 class="center-align">ADVANCED SETTINGS</h8>
+               <h6 class="center-align">ADVANCED SETTINGS</h6>
              </div>
              <div class="collapsible-body card-content">
                <div class="row">
