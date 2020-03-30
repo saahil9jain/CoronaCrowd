@@ -544,7 +544,6 @@ function handleEvents (rtc) {
       removeView(id);
     }
     Toast.notice("peer leave")
-    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
     console.log('peer-leave', id);
   })
 
