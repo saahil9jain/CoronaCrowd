@@ -36,7 +36,7 @@ var app = new Vue({
     },
     my_avatar: '/assets/img/me.png',
     me: null,
-    scene: 'interstitial', // testing, change back to 'interstitial'
+    scene: 'crowd', // testing, change back to 'interstitial'
     camera_on: false,
     my_saved_location: {
       x: _DB.my_location[0],

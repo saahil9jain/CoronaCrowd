@@ -297,10 +297,11 @@ body#crowd {
   padding: 5px;
   border-radius: 6px;
   opacity: 0;
+  font-size:.8em;
   -webkit-transition: opacity .2s;
   transition: opacity .2s;
   position: absolute;
-  z-index: 1;
+  z-index: 15;
   top: -5px;
   right: 105%;
 }
@@ -310,6 +311,15 @@ body#crowd {
   opacity: 1;
 }
 
+.crowd-host .opt-halo {
+    width: 75px;
+    height: 75px;
+    border: 3px solid rgba(211, 99, 36, 0.43);
+    display: block;
+    border-radius: 50%;
+    margin-left: -25%;
+    margin-top: -25%;
+}
 
 /* Modals */
 
