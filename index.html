@@ -7,8 +7,12 @@
   <link rel='stylesheet' href='assets/css/style.css'>
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class='topbar'>
@@ -16,8 +20,121 @@
   </header>
 
   <div id='map'></div>
+
+  <!-- Channel Modal -->
+  <div class="modal fade" id="channelModal" tabindex="-1" role="dialog" aria-labelledby="channelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Bob's Donuts</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- for joining a channel -->
+         <form id="form" class="row col l12 s12">
+           <div class="row container col l12 s12">
+             <div class="col" style="min-width: 433px; max-width: 443px">
+               <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
+                 <div class="row card-content" style="margin-bottom: 0px;">
+                     <div class="input-field">
+                       <label for="appID" class="active">App ID</label>
+                       <input type="text" placeholder="App ID" name="appID">
+                     </div>
+                     <div class="input-field">
+                       <label for="channel" class="active">Channel</label>
+                       <input type="text" placeholder="channel" name="channel">
+                     </div>
+                     <div class="input-field">
+                       <label for="token" class="active">Token</label>
+                       <input type="text" placeholder="token" name="token">
+                     </div>
+                     <div class="row" style="margin: 0">
+                       <div class="col s12">
+                       <button class="btn btn-raised btn-primary waves-effect waves-light" id="join">JOIN</button>
+                       <!-- <button class="btn btn-raised btn-primary waves-effect waves-light" id="leave">LEAVE</button> -->
+                       <!-- <button class="btn btn-raised btn-primary waves-effect waves-light" id="publish">PUBLISH</button> -->
+                       <!-- <button class="btn btn-raised btn-primary waves-effect waves-light" id="unpublish">UNPUBLISH</button> -->
+                       </div>
+                     </div>
+                 </div>
+               </div>
+               <ul class="collapsible card agora-secondary-border" style="margin-top: .4rem; border: 1px ">
+                 <li>
+                   <div class="collapsible-header agora-secondary-bg">
+                     <h8 class="center-align">ADVANCED SETTINGS</h8>
+                   </div>
+                   <div class="collapsible-body card-content">
+                     <div class="row">
+                       <div class="col s12">
+                         <div class="input-field">
+                           <label for="UID" class="active">UID</label>
+                           <input type="number" placeholder="UID" name="uid">
+                         </div>
+                         <div class="input-field">
+                           <label for="cameraId" class="active">CAMERA</label>
+                           <select name="cameraId" id="cameraId"></select>
+                         </div>
+                         <div class="input-field">
+                           <label for="microphoneId" class="active">MICROPHONE</label>
+                           <select name="microphoneId" id="microphoneId"></select>
+                         </div>
+                         <div class="input-field">
+                           <label for="cameraResolution" class="active">CAMERA RESOLUTION</label>
+                           <select name="cameraResolution" id="cameraResolution"></select>
+                         </div>
+                         <div class="row col s12">
+                           <div class="row">
+                             <label for="mode" class="active">MODE</label>
+                           </div>
+                           <div class="row">
+                             <label>
+                               <input type="radio" class="with-gap" name="mode" value="live" checked />
+                               <span>live</span>
+                             </label>
+
+                             <label>
+                               <input type="radio" class="with-gap" name="mode" value="rtc" />
+                               <span>rtc</span>
+                             </label>
+                           </div>
+                         </div>
+                         <div class="row col s12">
+                           <div class="row">
+                             <label for="codec" class="active">CODEC</label>
+                           </div>
+                           <div class="row">
+                             <label>
+                               <input type="radio" class="with-gap" name="codec" value="h264" checked />
+                               <span>h264</span>
+                             </label>
+
+                             <label>
+                               <input type="radio" class="with-gap" name="codec" value="vp8" />
+                               <span>vp8</span>
+                             </label>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                 </li>
+               </ul>
+             </div>
+           </div>
+         </form>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to the map</button>
+          <button type="button" class="btn btn-primary">Enter channel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class='hero span'>
-    <h1>Community in the time of corona</h1>
+    <h1>Community in the time of COVID-19</h1>
     <p>In times of quarantine, people all over the world are fighting physical isolation by returning to community spaces in online form.</p>
     <div class='action'>
       <a href="mailto:hi@coronacrowd.fake.website?subject=Host%20a%20crowd%20inquiry&body=Hi!%20I'm%20interested%20in%20hosting%20a%20crowd%20on%20Corona%20Crowd%20and%20would%20love%20to%20learn%20more.%20Can%20you%20send%20me%20some%20details%20on%20how%20I%20can%20register%20a%20crowd%20host%20and%20get%20my%20community%20space%20up%20and%20running%3FThanks!" class="button">
@@ -42,7 +159,7 @@
     <ol>
       <li>Crowds can only convene during open hours, which are set by community spaces</li>
       <li>A dedicated Crowd Host from the hosting organization is present</li>
-      <li>No personal contact info, such as names or phone numbers, is ever revealed to anyone without explicit consent</li>
+      <li>No personal contact information, such as names or phone numbers, is ever revealed to anyone without explicit consent</li>
       <li>People can report any abuse to their Crowd Host at any time using a secure messaging platform </li>
   </section>
 
@@ -76,8 +193,8 @@
     var map = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
-      center: [0, 0], // starting position
-      zoom: 1// starting zoom
+      center: [-100, 40], // starting position
+      zoom: 4// starting zoom
     });
 
     // prepare marker data
@@ -101,8 +218,9 @@
           coordinates: [-122.414, 37.776]
         },
         properties: {
-          title: 'Crowd (beta)',
-          description: 'San Francisco, California<div class="action"><a href="crowd.html" class="button button--crowdlaunch"><span class="material-icons">people_alt</span> Visit</a></div>'
+          title: "Bob's Donuts",
+          description: 'San Francisco, California<div class="action"><a class="button btn-sm button--crowdlaunch" data-toggle="modal" data-target="#channelModal"><span class="material-icons">people_alt</span> Visit</a></div>',
+          image: 'assets/img/donuts.jpeg'
         }
       }]
     };
@@ -117,8 +235,8 @@
       // make a marker for each feature and add to the map
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .setPopup(new mapboxgl.Popup({ offset: 25}) // add popups
+          .setHTML('<img class="thumbnail_image" src="' + marker.properties.image + '">' + '<h5>' + marker.properties.title + '</h5>' + marker.properties.description))
         .addTo(map);
 
     })
@@ -137,6 +255,99 @@
     - ...
 
     */
+
+  </script>
+
+  <script type="text/javascript">
+
+
+    function validator(formData, fields) {
+      var keys = Object.keys(formData);
+      for (let key of keys) {
+        if (fields.indexOf(key) != -1) {
+          if (!formData[key]) {
+            Toast.error("Please Enter " + key);
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    function serializeformData() {
+      var formData = $("#form").serializeArray();
+      var obj = {}
+      for (var item of formData) {
+        var key = item.name;
+        var val = item.value;
+        obj[key] = val;
+      }
+      return obj;
+    }
+
+    $(function () {
+        getDevices(function (devices) {
+          devices.audios.forEach(function (audio) {
+            $('<option/>', {
+              value: audio.value,
+              text: audio.name,
+            }).appendTo("#microphoneId");
+          })
+          devices.videos.forEach(function (video) {
+            $('<option/>', {
+              value: video.value,
+              text: video.name,
+            }).appendTo("#cameraId");
+          })
+          resolutions.forEach(function (resolution) {
+            $('<option/>', {
+              value: resolution.value,
+              text: resolution.name
+            }).appendTo("#cameraResolution");
+          })
+          M.AutoInit();
+        })
+
+        var fields = ['appID', 'channel'];
+
+        $("#join").on("click", function (e) {
+          console.log("join")
+          e.preventDefault();
+          var params = serializeformData();
+          if (validator(params, fields)) {
+            join(rtc, params);
+          }
+        })
+
+        // $("#publish").on("click", function (e) {
+        //   console.log("publish")
+        //   e.preventDefault();
+        //   var params = serializeformData();
+        //   if (validator(params, fields)) {
+        //     publish(rtc);
+        //   }
+        // });
+
+        // $("#unpublish").on("click", function (e) {
+        //   console.log("unpublish")
+        //   e.preventDefault();
+        //   var params = serializeformData();
+        //   if (validator(params, fields)) {
+        //     unpublish(rtc);
+        //   }
+        // });
+
+        // $("#leave").on("click", function (e) {
+        //   console.log("leave")
+        //   e.preventDefault();
+        //   var params = serializeformData();
+        //   if (validator(params, fields)) {
+        //     leave(rtc);
+        //   }
+        // })
+      })
+
+
 
   </script>
 </body>

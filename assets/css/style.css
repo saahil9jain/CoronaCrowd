@@ -91,11 +91,18 @@ button .material-icons, .button .material-icons {
   margin:20px auto;
 }
 
+
+.thumbnail_image {
+  height: 100px;
+  width: 150px;
+  margin: 10px;
+}
+
 /* Home page :: Map */
 
 #map {
   min-height:350px;
-  height:30vh;
+  height:60vh;
   width:100%;
 }
 
@@ -325,7 +332,7 @@ body#crowd {
 
 }
 
-.modal {
+.custom-modal {
   /* This way it could be display flex or grid or whatever also. */
  display: block;
  padding: 20px;
@@ -355,12 +362,12 @@ body#crowd {
  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
 }
 
-.modal h1 {
+.custom-modal h1 {
   font-size: 2em;
   font-weight: 600;
 }
 
-.modal h3 {
+.custom-modal h3 {
     font-weight: 600;
     text-align: center;
     font-size: 2em;
