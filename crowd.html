@@ -5,6 +5,7 @@
   <script src="https://cdn.agora.io/sdk/release/AgoraRTCSDK-3.0.2.js"></script>
   <link rel="stylesheet" href="./assets/css/common.css" />
   <link rel='stylesheet' href='assets/css/style.css'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -45,7 +46,7 @@
 
       <!-- draggable crowd map -->
       <div id="outerContainer">
-       <div id="container" style="background-image:url('assets/img/floorplan-shop.png')">
+       <div id="container" style="background-image:url('/assets/img/floorplan-shop.png')">
          <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
          <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
            <span class='tooltiptext'>{{topic.name}}</span>
@@ -183,11 +184,11 @@
   <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
 
   <!-- Webcam -->
-  <script src='assets/js/webcam.min.js'></script>
+  <script src='/assets/js/webcam.min.js'></script>
 
-  <script src='assets/js/crowd.js'></script>
+  <script src='/assets/js/crowd.js'></script>
 
-  <script src='assets/js/drag.crowd.js'></script>
+  <script src='/assets/js/drag.crowd.js'></script>
 
 </body>
 </html>

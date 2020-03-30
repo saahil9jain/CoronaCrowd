@@ -1,0 +1,8 @@
+{
+  "name": "corona-crowd",
+  "routes": [
+    { "src": "/", "dest": "index.html" },
+    { "src": "/crowd/eFlOVqORasM9qspBq0gv", "dest": "crowd.html" },
+    { "handle": "filesystem" }
+  ]
+}
