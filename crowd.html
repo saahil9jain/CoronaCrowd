@@ -46,7 +46,7 @@
 
       <!-- draggable crowd map -->
       <div id="outerContainer">
-       <div id="container" style="background-image:url('/assets/img/floorplan-shop.png')">
+       <div id="container" style="background-image:url('assets/img/floorplan-shop.png')">
          <div class='person' v-for="person in people" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }"></div>
          <div class='topic' v-for="topic in topics" v-bind:style="{ left: topic.pos.x + 'px', top: topic.pos.y + 'px' }">
            <span class='tooltiptext'>{{topic.name}}</span>
@@ -184,11 +184,9 @@
   <script src='https://unpkg.com/panzoom@8.7.3/dist/panzoom.min.js'></script>
 
   <!-- Webcam -->
-  <script src='/assets/js/webcam.min.js'></script>
-
-  <script src='/assets/js/crowd.js'></script>
-
-  <script src='/assets/js/drag.crowd.js'></script>
+  <script src='assets/js/webcam.min.js'></script>
+  <script src='assets/js/crowd.js'></script>
+  <script src='assets/js/drag.crowd.js'></script>
 
 </body>
 </html>

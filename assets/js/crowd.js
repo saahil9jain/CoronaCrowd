@@ -34,7 +34,7 @@ var app = new Vue({
     crowd: {
       title: _DB.crowd_name
     },
-    my_avatar: '/assets/img/me.png',
+    my_avatar: 'assets/img/me.png',
     me: null,
     scene: 'interstitial', // testing, change back to 'interstitial'
     camera_on: false,
