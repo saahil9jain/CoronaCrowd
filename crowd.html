@@ -49,7 +49,7 @@
 
       <!-- draggable crowd map -->
       <div id="outerContainer">
-       <div id="container" style="background-image:url('/assets/img/floorplan-shop.png')">
+       <div id="container" style="background-image:url('assets/img/floorplan-shop.png')">
          <div class='person' v-for="person in people" v-bind:class="{ grouped:person.grouped, crowd_host: person.is_host }" v-bind:style="{ backgroundImage: 'url(' + person.avatar + ')', left: person.pos.x + 'px', top: person.pos.y + 'px' }">
            <span class='opt-halo'></span>
            <span class='opt-description' v-if='person.is_host'>
@@ -69,7 +69,7 @@
 
 
   <!-- for joining a channel -->
-   <form id="form" class="row col l12 s12">
+<!--    <form id="form" class="row col l12 s12">
      <div class="row container col l12 s12">
        <div class="col" style="min-width: 433px; max-width: 443px">
          <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
@@ -158,12 +158,8 @@
          </ul>
        </div>
      </div>
-   </form>
+   </form> -->
 
-
-
-
-  <hr>
   <section class='help custom-modal' v-if="scene == 'help'">
     <a href='#' class='button button--close' v-on:click="scene = 'crowd'"><i class="material-icons">close</i> Close</a>
     <h3>How it works</h3>
