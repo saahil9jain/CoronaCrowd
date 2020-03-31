@@ -257,6 +257,16 @@ var app = new Vue({
   }
 })
 
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    // Delete person in firebase on exit
+    db.collection('people').doc(_DB.my_id).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+    e.returnValue = '';
+});
 
 // // Implement pan functionality
 // var $crowd = document.querySelector('#crowdmap')
@@ -313,15 +323,6 @@ var app = new Vue({
 // window.onbeforeunload = function(){
 //     let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
 // }
-
-window.addEventListener("beforeunload", function(evt) {
-    // Delete on exit
-    let deleteDoc = db.collection('people').doc(_DB.my_id).delete();
-
-    delete evt['returnValue'];
-
-    return null;
-});
 
 
 // agora stuff
@@ -633,7 +634,7 @@ var option = {
   appID: 'e9a19ca1d2c64103a6bc88ad502b8213',
   channel: 'test-channel',
   uid: _DB.my_id,
-  token: '006e9a19ca1d2c64103a6bc88ad502b8213IADZWz1y9o3Aeu4oBleTre2f9KwFW3IzAHDkR3vu8jFzUWLMzZAAAAAAEACE31yhzp6CXgEAAQDOnoJe'
+  token: '006e9a19ca1d2c64103a6bc88ad502b8213IAAnBYLtgDQulGxLxwCFJAdU2XSMpFhtYFIxM72C7lKbEmLMzZAAAAAAEACapUd9ngiFXgEAAQCeCIVe'
 }
 
 function join (rtc, option) {
