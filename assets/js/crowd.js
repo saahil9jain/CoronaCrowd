@@ -265,7 +265,7 @@ window.addEventListener('beforeunload', function (e) {
     }).catch(function(error) {
       console.error("Error removing document: ", error);
     });
-    e.returnValue = '';
+    e.returnValue = "";
 });
 
 // // Implement pan functionality

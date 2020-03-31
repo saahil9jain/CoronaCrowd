@@ -21,6 +21,7 @@ function dragStart(e) {
   if (e.type === "touchstart") {
     initialX = e.touches[0].clientX;
     initialY = e.touches[0].clientY;
+
   } else {
     initialX = e.clientX;
     initialY = e.clientY;
@@ -32,6 +33,12 @@ function dragStart(e) {
 }
 
 function dragEnd(e) {
+
+  currentX = e.clientX - initialX;
+  currentY = e.clientY - initialY;
+  xOffset = currentX;
+  yOffset = currentY;
+
   initialX = currentX;
   initialY = currentY;
 
